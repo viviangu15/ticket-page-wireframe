@@ -193,7 +193,15 @@
     }
 
     /* Header dropdown fields */
-    .header-fields { display: flex; gap: 16px; margin-top: 14px; }
+    .header-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .header-fields-group {
+      display: flex; gap: 16px;
+    }
     .header-field { flex: 1; min-width: 0; }
     .header-field-label {
       font-family: 'IBM Plex Mono', monospace;
@@ -278,7 +286,8 @@
 
     /* ══ BODY LAYOUT ══ */
     .body-layout {
-      display: grid; grid-template-columns: 1fr 1fr;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       flex: 1; overflow: hidden;
     }
 
@@ -724,6 +733,7 @@
       </div>
 
       <div class="header-fields">
+        <div class="header-fields-group">
         <div class="header-field">
           <div class="header-field-label">Status</div>
           <div class="status-dropdown-wrapper">
@@ -773,6 +783,8 @@
             <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </div>
+        </div>
+        <div class="header-fields-group">
         <div class="header-field">
           <div class="header-field-label">Category</div>
           <div class="header-dropdown">
@@ -804,6 +816,7 @@
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
