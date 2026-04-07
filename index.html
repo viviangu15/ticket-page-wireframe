@@ -781,6 +781,30 @@
             <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </div>
+        <div class="header-field">
+          <div class="header-field-label">Queue</div>
+          <div class="queue-dropdown-wrapper" style="position:relative;">
+            <div class="header-dropdown" onclick="document.querySelector('.queue-menu').classList.toggle('open')">
+              <div class="header-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="header-dropdown-text queue-selected-text">Engineering</span>
+              <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+            <div class="queue-menu status-menu">
+              <div class="status-option selected" data-queue="Engineering" onclick="selectQueue(this)">
+                <span class="status-option-label">Engineering</span>
+                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="status-option" data-queue="HR" onclick="selectQueue(this)">
+                <span class="status-option-label">HR</span>
+                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="status-option" data-queue="Marketing" onclick="selectQueue(this)">
+                <span class="status-option-label">Marketing</span>
+                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1193,10 +1217,22 @@
     });
   });
 
-  // Close dropdown when clicking outside
+  // Queue dropdown
+  function selectQueue(option) {
+    const wrapper = option.closest('.queue-dropdown-wrapper');
+    wrapper.querySelectorAll('.status-option').forEach(o => o.classList.remove('selected'));
+    option.classList.add('selected');
+    wrapper.querySelector('.queue-selected-text').textContent = option.dataset.queue;
+    wrapper.querySelector('.queue-menu').classList.remove('open');
+  }
+
+  // Close dropdowns when clicking outside
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.status-dropdown-wrapper')) {
       statusMenu.classList.remove('open');
+    }
+    if (!e.target.closest('.queue-dropdown-wrapper')) {
+      document.querySelector('.queue-menu').classList.remove('open');
     }
   });
 </script>
