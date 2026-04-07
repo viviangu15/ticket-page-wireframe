@@ -30,7 +30,6 @@
       --radius: 8px;
       --radius-lg: 12px;
       --left-nav-width: 210px;
-      --right-sidebar-width: 360px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,9 +45,7 @@
       overflow: hidden;
     }
 
-    /* ══════════════════════════════════════════
-       LEFT NAVIGATION
-       ══════════════════════════════════════════ */
+    /* ══ LEFT NAVIGATION ══ */
     .left-nav {
       width: var(--left-nav-width);
       background: var(--bg-raised);
@@ -103,37 +100,29 @@
     }
     .nav-user-name { font-size: 13px; font-weight: 500; color: var(--text-primary); }
 
-    /* ══════════════════════════════════════════
-       CONTENT AREA (everything right of left-nav)
-       ══════════════════════════════════════════ */
+    /* ══ CONTENT AREA ══ */
     .content-area {
       flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0;
     }
 
-    /* ── Back Button ── */
+    /* Back button */
     .back-bar {
       padding: 10px 32px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border); flex-shrink: 0;
     }
     .back-link {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: 13px; font-weight: 500;
-      color: var(--text-secondary); text-decoration: none;
-      transition: color 0.15s;
+      font-size: 13px; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; transition: color 0.15s;
     }
     .back-link:hover { color: var(--text-primary); }
     .back-link svg { width: 14px; height: 14px; }
 
-    /* ══════════════════════════════════════════
-       TOP SECTION: Ticket Identity + Current State
-       ══════════════════════════════════════════ */
+    /* ══ TOP: Ticket Header ══ */
     .ticket-header {
       padding: 20px 32px 18px;
       border-bottom: 1px solid var(--border);
-      background: var(--bg);
-      flex-shrink: 0;
+      background: var(--bg); flex-shrink: 0;
     }
     .ticket-id-row {
       display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap;
@@ -141,11 +130,6 @@
     .ticket-id {
       font-size: 13px; color: var(--text-muted); font-weight: 500;
       font-family: 'IBM Plex Mono', monospace;
-    }
-    .ticket-title {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: 22px; font-weight: 700; color: var(--text-primary);
-      letter-spacing: -0.4px; line-height: 1.3;
     }
 
     /* Badges */
@@ -156,17 +140,60 @@
       letter-spacing: 0.06em; border: 1px solid;
     }
     .badge-p2 { background: rgba(251,146,60,0.12); color: var(--color-orange); border-color: rgba(251,146,60,0.2); }
-    .badge-status { background: rgba(91,155,245,0.15); color: var(--color-blue); border-color: rgba(91,155,245,0.25); }
-    .badge-status.in-progress { background: rgba(251,146,60,0.1); color: var(--color-orange); border-color: rgba(251,146,60,0.2); }
-    .badge-status.resolved { background: rgba(52,211,153,0.1); color: var(--color-green); border-color: rgba(52,211,153,0.2); }
     .badge-status.open { background: rgba(91,155,245,0.15); color: var(--color-blue); border-color: rgba(91,155,245,0.25); }
-    .badge-external { background: rgba(91,155,245,0.1); color: var(--color-blue); border-color: rgba(91,155,245,0.2); }
-    .badge-external svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .badge-status.resolved { background: rgba(52,211,153,0.1); color: var(--color-green); border-color: rgba(52,211,153,0.2); }
+
+    /* SLA badge */
+    .badge-sla {
+      background: rgba(248,113,113,0.1); color: var(--color-red); border-color: rgba(248,113,113,0.2);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .badge-sla.ok {
+      background: rgba(52,211,153,0.1); color: var(--color-green); border-color: rgba(52,211,153,0.2);
+    }
+
+    /* Synced from external — subtle inline link */
+    .external-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--text-muted);
+      text-decoration: none; transition: color 0.15s;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .external-link:hover { color: var(--text-secondary); }
+    .external-link .ext-icon {
+      width: 16px; height: 16px; border-radius: 3px;
+      background: var(--bg-glass); display: flex; align-items: center; justify-content: center;
+    }
+    .external-link .ext-icon svg { width: 12px; height: 12px; }
+    .external-link .ext-open { width: 10px; height: 10px; opacity: 0.5; }
+
+    /* Title row */
+    .ticket-title-row {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .ticket-title {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 22px; font-weight: 700; color: var(--text-primary);
+      letter-spacing: -0.4px; line-height: 1.3;
+    }
+    .copy-link-btn {
+      width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); cursor: pointer; flex-shrink: 0;
+      border: 1px solid var(--border); background: none;
+      transition: all 0.15s;
+    }
+    .copy-link-btn:hover { color: var(--text-secondary); background: var(--bg-glass); }
+    .copy-link-btn svg { width: 14px; height: 14px; }
+
+    /* Ticket description */
+    .ticket-description {
+      font-size: 13px; color: var(--text-secondary); margin-top: 8px;
+      line-height: 1.6; max-width: 720px;
+    }
 
     /* Header dropdown fields */
-    .header-fields {
-      display: flex; gap: 16px; margin-top: 14px;
-    }
+    .header-fields { display: flex; gap: 16px; margin-top: 14px; }
     .header-field { flex: 1; min-width: 0; }
     .header-field-label {
       font-family: 'IBM Plex Mono', monospace;
@@ -185,21 +212,6 @@
     }
     .header-dropdown.status-in-progress .header-dropdown-text { color: var(--color-blue); }
     .header-dropdown.status-in-progress .header-dropdown-chevron { color: var(--color-blue); }
-    .header-dropdown.status-open {
-      background: rgba(91,155,245,0.15); border-color: var(--color-blue);
-    }
-    .header-dropdown.status-open .header-dropdown-text { color: var(--color-blue); }
-    .header-dropdown.status-open .header-dropdown-chevron { color: var(--color-blue); }
-    .header-dropdown.status-pending {
-      background: transparent; border-color: var(--color-gold);
-    }
-    .header-dropdown.status-pending .header-dropdown-text { color: var(--color-gold); }
-    .header-dropdown.status-pending .header-dropdown-chevron { color: var(--color-gold); }
-    .header-dropdown.status-resolved {
-      background: transparent; border-color: var(--color-green);
-    }
-    .header-dropdown.status-resolved .header-dropdown-text { color: var(--color-green); }
-    .header-dropdown.status-resolved .header-dropdown-chevron { color: var(--color-green); }
     .header-dropdown-icon {
       width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; color: var(--text-muted);
@@ -218,197 +230,107 @@
     }
     .header-dropdown-chevron svg { width: 14px; height: 14px; }
 
-    .header-requester { display: flex; align-items: center; gap: 10px; padding: 4px 0; }
-    .header-requester-avatar {
-      width: 24px; height: 24px; border-radius: 50%; background: var(--color-blue);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 600; color: #fff; flex-shrink: 0;
-    }
-    .header-requester-name { font-size: 14px; font-weight: 500; color: var(--text-primary); }
-
-    /* ══════════════════════════════════════════
-       MAIN BODY LAYOUT: Timeline (center) + Sidebar (right)
-       ══════════════════════════════════════════ */
+    /* ══ BODY LAYOUT ══ */
     .body-layout {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      flex: 1;
-      overflow: hidden;
+      display: grid; grid-template-columns: 2fr 1fr;
+      flex: 1; overflow: hidden;
     }
 
-    /* ── MAIN: Timeline ── */
+    /* ══ MAIN TIMELINE ══ */
     .main-timeline {
       overflow-y: auto; padding: 24px 32px 40px; min-width: 0;
     }
 
-    .timeline-header {
-      margin-bottom: 20px;
+    /* Catch-up card */
+    .catchup-card {
+      background: rgba(167,139,250,0.06);
+      border: 1px solid rgba(167,139,250,0.12);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px; margin-bottom: 24px;
     }
-    .timeline-header-row1 {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 12px;
+    .catchup-header {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
     }
-    .timeline-header-row2 {
-      display: flex; align-items: center; gap: 12px;
-      justify-content: flex-start;
+    .catchup-icon {
+      width: 24px; height: 24px; border-radius: 6px;
+      background: rgba(167,139,250,0.12);
+      display: flex; align-items: center; justify-content: center;
     }
-    .tl-search {
-      display: flex; align-items: center; gap: 8px;
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 5px 12px;
-      margin-left: auto; flex: 1; max-width: 240px;
-    }
-    .tl-search svg { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
-    .tl-search input {
-      background: none; border: none; outline: none;
-      font-size: 12px; font-family: 'DM Sans', sans-serif;
-      color: var(--text-primary); width: 100%;
-    }
-    .tl-search input::placeholder { color: var(--text-muted); }
-
-    /* Compact / Expanded toggle */
-    .tl-view-toggle {
-      display: flex; gap: 0;
-    }
-    .tl-view-btn {
-      padding: 5px 10px; font-size: 11px; font-weight: 600;
-      color: var(--text-muted); cursor: pointer;
-      border: 1px solid var(--border); background: var(--bg-glass);
-      transition: all 0.12s; display: flex; align-items: center; gap: 5px;
-    }
-    .tl-view-btn:first-child { border-radius: var(--radius) 0 0 var(--radius); }
-    .tl-view-btn:last-child { border-radius: 0 var(--radius) var(--radius) 0; border-left: none; }
-    .tl-view-btn:hover { color: var(--text-secondary); }
-    .tl-view-btn.active {
-      background: var(--accent-soft); color: var(--accent); border-color: rgba(204,76,26,0.3);
-    }
-    .tl-view-btn svg { width: 12px; height: 12px; }
-
-    /* Compact mode: hide body cards, tighten spacing */
-    .timeline.compact .tl-item { padding-bottom: 12px; }
-    .timeline.compact .tl-body { display: none; }
-    .timeline.compact .tl-field-change { display: none; }
-    .timeline.compact .tl-header { margin-bottom: 0; cursor: pointer; }
-
-    /* In compact mode, clicking a row expands it */
-    .timeline.compact .tl-item.expanded .tl-body { display: block; }
-    .timeline.compact .tl-item.expanded .tl-field-change { display: flex; }
-    .timeline.compact .tl-item.expanded { padding-bottom: 24px; }
-    .timeline.compact .tl-item.expanded .tl-header { margin-bottom: 5px; }
-    .timeline-title {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: 16px; font-weight: 700; color: var(--text-primary);
-    }
-    .timeline-filters {
-      display: flex; gap: 0;
-    }
-    .tl-filter {
-      padding: 5px 14px; font-size: 12px; font-weight: 600;
-      color: var(--text-muted); cursor: pointer;
-      border: 1px solid var(--border); background: var(--bg-glass);
-      transition: all 0.12s;
-    }
-    .tl-filter:first-child { border-radius: var(--radius) 0 0 var(--radius); }
-    .tl-filter:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
-    .tl-filter:not(:first-child) { border-left: none; }
-    .tl-filter:hover { color: var(--text-secondary); }
-    .tl-filter.active {
-      background: var(--accent-soft); color: var(--accent);
-      border-color: rgba(204,76,26,0.3);
-    }
-    .tl-filter .count {
-      font-size: 10px; margin-left: 4px; opacity: 0.7;
+    .catchup-icon svg { width: 14px; height: 14px; color: var(--color-violet); }
+    .catchup-label {
       font-family: 'IBM Plex Mono', monospace;
-    }
-
-    /* Timeline */
-    .timeline { position: relative; }
-    .timeline::before {
-      content: ''; position: absolute; left: 15px; top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(180deg, var(--border-strong), var(--border), transparent);
-    }
-    .tl-item { position: relative; padding-left: 44px; padding-bottom: 24px; }
-    .tl-item:last-child { padding-bottom: 0; }
-    .tl-dot {
-      position: absolute; left: 8px; top: 4px;
-      width: 14px; height: 14px; border-radius: 50%;
-      border: 2px solid var(--border-strong); background: var(--bg);
-    }
-    .tl-dot.comment { border-color: var(--color-blue); background: rgba(91,155,245,0.15); }
-    .tl-dot.status { border-color: var(--color-orange); background: rgba(251,146,60,0.15); }
-    .tl-dot.workflow { border-color: var(--color-teal); background: rgba(45,212,168,0.15); }
-    .tl-dot.ai { border-color: var(--color-violet); background: rgba(167,139,250,0.15); }
-    .tl-dot.system { border-color: var(--text-muted); background: var(--bg-glass); }
-    .tl-dot.sync { border-color: var(--color-blue); background: rgba(91,155,245,0.1); }
-    .tl-dot.created { border-color: var(--accent); background: var(--accent); }
-
-    .tl-header {
-      display: flex; align-items: baseline; gap: 8px;
-      font-size: 13px; color: var(--text-secondary); margin-bottom: 5px;
-    }
-    .tl-actor { font-weight: 600; color: var(--text-primary); white-space: nowrap; }
-    .tl-action { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .tl-time {
-      margin-left: auto; font-size: 11px; color: var(--text-muted);
-      white-space: nowrap; font-family: 'IBM Plex Mono', monospace;
-      flex-shrink: 0;
-    }
-    .tl-type-tag {
       font-size: 11px; font-weight: 600; text-transform: uppercase;
-      padding: 3px 8px; border-radius: 4px; letter-spacing: 0.04em;
-      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.06em; color: var(--color-violet);
     }
-    .tl-type-tag.comment { background: rgba(91,155,245,0.12); color: var(--color-blue); }
-    .tl-type-tag.internal { background: rgba(245,197,66,0.12); color: var(--color-gold); }
-    .tl-type-tag.status { background: rgba(251,146,60,0.12); color: var(--color-orange); }
-    .tl-type-tag.workflow { background: rgba(45,212,168,0.12); color: var(--color-teal); }
-    .tl-type-tag.ai { background: rgba(167,139,250,0.12); color: var(--color-violet); }
-    .tl-type-tag.system { background: var(--bg-glass); color: var(--text-secondary); }
-    .tl-type-tag.sync { background: rgba(91,155,245,0.1); color: var(--color-blue); }
-
-    .tl-body {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 12px 14px;
-      font-size: 13px; color: var(--text-secondary);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    .catchup-body {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.7;
     }
-    .tl-body.internal-note { background: rgba(245,197,66,0.05); border-color: rgba(245,197,66,0.12); }
-    .tl-body p { margin-bottom: 6px; }
-    .tl-body p:last-child { margin-bottom: 0; }
-    .tl-body strong { color: var(--text-primary); font-weight: 600; }
-
-    .tl-field-change {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 13px; color: var(--text-secondary);
+    .catchup-body strong { color: var(--text-primary); }
+    .catchup-actions {
+      display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;
     }
-    .tl-old { text-decoration: line-through; color: var(--text-muted); }
-    .tl-arrow { color: var(--text-muted); font-size: 12px; }
-    .tl-new { font-weight: 600; color: var(--text-primary); }
+    .catchup-action {
+      padding: 6px 14px; border-radius: var(--radius);
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      border: 1px solid var(--border); background: var(--bg-glass);
+      color: var(--text-secondary); transition: all 0.12s;
+    }
+    .catchup-action:hover { background: var(--bg-card); color: var(--text-primary); }
+    .catchup-action.primary {
+      background: var(--accent); border-color: var(--accent);
+      color: #fff;
+    }
+    .catchup-action.primary:hover { background: #b54215; }
 
-    /* Composer */
+    /* Composer (at top of timeline) */
     .composer {
       background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); padding: 16px; margin-top: 28px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      border-radius: var(--radius-lg); padding: 16px; margin-bottom: 24px;
     }
-    .composer-toggle { display: flex; gap: 0; margin-bottom: 10px; border-bottom: 1px solid var(--border); }
-    .composer-toggle-btn {
-      padding: 5px 14px; font-size: 11px; font-weight: 600;
-      color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    .composer-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 10px;
     }
-    .composer-toggle-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
-    .composer-toggle-btn.internal.active { color: var(--color-gold); border-bottom-color: var(--color-gold); }
+    .composer-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .privacy-toggle {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--text-muted); cursor: pointer;
+    }
+    .privacy-toggle-switch {
+      width: 32px; height: 18px; border-radius: 10px;
+      background: var(--border-strong); position: relative;
+      transition: background 0.2s; flex-shrink: 0;
+    }
+    .privacy-toggle-switch::after {
+      content: ''; position: absolute; top: 2px; left: 2px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--text-secondary); transition: all 0.2s;
+    }
+    .privacy-toggle.private .privacy-toggle-switch {
+      background: var(--color-gold);
+    }
+    .privacy-toggle.private .privacy-toggle-switch::after {
+      left: 16px; background: #fff;
+    }
+    .privacy-toggle-label { font-weight: 500; }
+    .privacy-icon { width: 14px; height: 14px; }
+
     .composer-textarea {
-      width: 100%; min-height: 64px; background: var(--bg-glass);
+      width: 100%; min-height: 60px; background: var(--bg-glass);
       border: 1px solid var(--border); border-radius: var(--radius);
       padding: 10px 12px; font-size: 13px; font-family: 'DM Sans', sans-serif;
       resize: vertical; color: var(--text-primary);
     }
     .composer-textarea::placeholder { color: var(--text-muted); }
     .composer-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-    .composer-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
-    .attach-hint { font-size: 11px; color: var(--text-muted); }
+    .composer-footer {
+      display: flex; justify-content: space-between; align-items: center; margin-top: 10px;
+    }
+    .attach-hint {
+      font-size: 11px; color: var(--text-muted);
+      display: flex; align-items: center; gap: 4px;
+    }
+    .attach-hint svg { width: 14px; height: 14px; }
     .btn {
       padding: 7px 16px; border-radius: var(--radius); font-size: 13px; font-weight: 600;
       cursor: pointer; border: none; transition: all 0.15s; font-family: 'DM Sans', sans-serif;
@@ -418,27 +340,146 @@
     .btn-ghost { background: transparent; color: var(--text-secondary); border: 1px solid var(--border); }
     .btn-ghost:hover { background: var(--bg-glass); }
     .btn-sm { padding: 5px 12px; font-size: 12px; }
-    .btn-teal { background: rgba(45,212,168,0.12); color: var(--color-teal); border: 1px solid rgba(45,212,168,0.2); }
 
-    /* ══════════════════════════════════════════
-       RIGHT SIDEBAR: Supporting sections
-       ══════════════════════════════════════════ */
+    /* Timeline header */
+    .timeline-header { margin-bottom: 20px; }
+    .timeline-header-row {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .timeline-title {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 15px; font-weight: 700; color: var(--text-primary);
+    }
+    .timeline-filters { display: flex; gap: 0; }
+    .tl-filter {
+      padding: 5px 14px; font-size: 12px; font-weight: 600;
+      color: var(--text-muted); cursor: pointer;
+      border: 1px solid var(--border); background: var(--bg-glass); transition: all 0.12s;
+    }
+    .tl-filter:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+    .tl-filter:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+    .tl-filter:not(:first-child) { border-left: none; }
+    .tl-filter:hover { color: var(--text-secondary); }
+    .tl-filter.active {
+      background: var(--accent-soft); color: var(--accent); border-color: rgba(204,76,26,0.3);
+    }
+    .tl-filter .count {
+      font-size: 10px; margin-left: 4px; opacity: 0.7;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .tl-search {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 5px 12px;
+      margin-left: auto; flex: 1; max-width: 200px;
+    }
+    .tl-search svg { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
+    .tl-search input {
+      background: none; border: none; outline: none;
+      font-size: 12px; font-family: 'DM Sans', sans-serif;
+      color: var(--text-primary); width: 100%;
+    }
+    .tl-search input::placeholder { color: var(--text-muted); }
+
+    /* ══ TIMELINE — GitHub-style ══ */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: ''; position: absolute; left: 15px; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--border-strong), var(--border), transparent);
+    }
+
+    /* Minor events: plain text inline with the line */
+    .tl-minor {
+      position: relative; padding-left: 44px; padding-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-muted);
+    }
+    .tl-minor .tl-dot {
+      position: absolute; left: 10px; top: 4px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-raised); border: 2px solid var(--border-strong);
+    }
+    .tl-minor .tl-minor-icon {
+      width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0;
+    }
+    .tl-minor .tl-minor-actor { font-weight: 600; color: var(--text-secondary); }
+    .tl-minor .tl-minor-action { color: var(--text-muted); }
+    .tl-minor .tl-minor-detail { color: var(--text-secondary); font-weight: 500; }
+    .tl-minor .tl-time {
+      margin-left: auto; font-size: 11px; color: var(--text-muted);
+      font-family: 'IBM Plex Mono', monospace; white-space: nowrap; flex-shrink: 0;
+    }
+    .tl-minor .tl-old { text-decoration: line-through; color: var(--text-muted); }
+    .tl-minor .tl-arrow { color: var(--text-muted); }
+
+    /* Rich events: cards (comments, running workflows, AI) */
+    .tl-rich {
+      position: relative; padding-left: 44px; padding-bottom: 24px;
+    }
+    .tl-rich .tl-dot {
+      position: absolute; left: 8px; top: 4px;
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 2px solid var(--border-strong); background: var(--bg);
+    }
+    .tl-rich .tl-dot.comment { border-color: var(--color-blue); background: rgba(91,155,245,0.15); }
+    .tl-rich .tl-dot.workflow { border-color: var(--color-teal); background: rgba(45,212,168,0.15); }
+    .tl-rich .tl-dot.ai { border-color: var(--color-violet); background: rgba(167,139,250,0.15); }
+    .tl-rich .tl-dot.created { border-color: var(--accent); background: var(--accent); }
+
+    .tl-rich-header {
+      display: flex; align-items: baseline; gap: 8px;
+      font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;
+    }
+    .tl-rich-actor { font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+    .tl-rich-action { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tl-rich-time {
+      margin-left: auto; font-size: 11px; color: var(--text-muted);
+      white-space: nowrap; font-family: 'IBM Plex Mono', monospace; flex-shrink: 0;
+    }
+    .tl-rich-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      color: var(--text-muted); font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .tl-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 12px 14px;
+      font-size: 13px; color: var(--text-secondary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .tl-card.internal {
+      background: rgba(245,197,66,0.05); border-color: rgba(245,197,66,0.12);
+    }
+    .tl-card.internal::before {
+      content: 'INTERNAL'; display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.06em;
+      color: var(--color-gold); margin-bottom: 6px;
+    }
+    .tl-card p { margin-bottom: 6px; }
+    .tl-card p:last-child { margin-bottom: 0; }
+    .tl-card strong { color: var(--text-primary); font-weight: 600; }
+
+    /* Visibility tag on comments */
+    .tl-visibility {
+      font-size: 10px; color: var(--text-muted);
+      font-family: 'IBM Plex Mono', monospace;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .tl-visibility svg { width: 10px; height: 10px; }
+
+    /* ══ RIGHT SIDEBAR ══ */
     .right-sidebar {
       background: var(--bg-raised);
       border-left: 1px solid var(--border);
-      overflow-y: auto;
-      min-width: 0;
+      overflow-y: auto; min-width: 0;
     }
 
-    /* Sidebar collapsible sections */
-    .sb-section {
-      border-bottom: 1px solid var(--border);
-    }
+    .sb-section { border-bottom: 1px solid var(--border); }
     .sb-section-header {
       display: flex; align-items: center; gap: 10px;
-      padding: 14px 20px;
-      cursor: pointer;
-      transition: background 0.12s;
+      padding: 14px 20px; cursor: pointer; transition: background 0.12s;
     }
     .sb-section-header:hover { background: var(--bg-glass); }
     .sb-section-icon {
@@ -455,23 +496,15 @@
     .sb-section-chevron { color: var(--text-muted); display: flex; align-items: center; }
     .sb-section-chevron svg { width: 14px; height: 14px; transition: transform 0.2s; }
     .sb-section-body {
-      padding: 0 20px 18px;
-      overflow: hidden;
+      padding: 0 20px 18px; overflow: hidden;
       transition: max-height 0.25s ease, padding 0.25s ease, opacity 0.2s ease;
-      max-height: 800px;
-      opacity: 1;
+      max-height: 800px; opacity: 1;
     }
     .sb-section.collapsed .sb-section-body {
-      max-height: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-      opacity: 0;
+      max-height: 0; padding-top: 0; padding-bottom: 0; opacity: 0;
     }
-    .sb-section.collapsed .sb-section-chevron svg {
-      transform: rotate(-90deg);
-    }
+    .sb-section.collapsed .sb-section-chevron svg { transform: rotate(-90deg); }
 
-    /* Detail rows */
     .detail-row {
       display: flex; justify-content: space-between; align-items: flex-start;
       padding: 4px 0; font-size: 13px;
@@ -481,7 +514,13 @@
     .detail-value a { color: var(--accent); text-decoration: none; }
     .detail-value a:hover { text-decoration: underline; }
 
-    /* Tags */
+    .sub-heading {
+      margin-top: 14px; margin-bottom: 6px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-muted);
+    }
+
     .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
     .tag {
       background: var(--bg-glass); border: 1px solid var(--border);
@@ -489,7 +528,7 @@
       color: var(--text-secondary); font-family: 'IBM Plex Mono', monospace;
     }
 
-    /* Workflow card in sidebar */
+    /* Workflow in sidebar */
     .sb-workflow-card {
       display: flex; align-items: center; gap: 12px;
       padding: 12px 14px; background: rgba(45,212,168,0.04);
@@ -513,10 +552,7 @@
     .sb-wf-bar.done { background: var(--color-teal); }
     .sb-wf-bar.active { background: var(--color-orange); animation: pulse 2s ease-in-out infinite; }
     .sb-wf-bar.pending { background: var(--border); }
-    .sb-wf-label {
-      font-size: 9px; color: var(--text-muted); text-align: center;
-      font-family: 'IBM Plex Mono', monospace;
-    }
+    .sb-wf-label { font-size: 9px; color: var(--text-muted); text-align: center; font-family: 'IBM Plex Mono', monospace; }
     .sb-wf-label.done { color: var(--color-teal); }
     .sb-wf-label.active { color: var(--color-orange); font-weight: 600; }
 
@@ -527,20 +563,26 @@
       font-size: 13px; color: rgba(167,139,250,0.8); line-height: 1.6;
     }
     .sb-ai-card strong { color: var(--color-violet); }
-    .sb-ai-suggestions { margin-top: 12px; }
     .sb-ai-suggestion {
       display: flex; align-items: center; gap: 10px;
       padding: 10px 12px; background: var(--bg-glass); border: 1px solid var(--border);
-      border-radius: var(--radius); margin-bottom: 6px; font-size: 12px;
+      border-radius: var(--radius); margin-top: 6px; font-size: 12px;
     }
-    .sb-ai-suggestion:last-child { margin-bottom: 0; }
     .sb-ai-suggestion-title { flex: 1; color: var(--text-primary); font-weight: 500; }
     .sb-ai-confidence {
       font-family: 'IBM Plex Mono', monospace; font-size: 11px;
       color: var(--color-teal); font-weight: 500; flex-shrink: 0;
     }
 
-    /* Source card in sidebar */
+    .sb-similar-ticket {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 12px;
+    }
+    .sb-similar-ticket:last-child { border-bottom: none; }
+    .sb-similar-id { color: var(--accent); font-weight: 500; font-family: 'IBM Plex Mono', monospace; font-size: 11px; flex-shrink: 0; }
+    .sb-similar-title { color: var(--text-secondary); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* Source in sidebar */
     .sb-source-card {
       background: rgba(91,155,245,0.05); border: 1px solid rgba(91,155,245,0.12);
       border-radius: var(--radius); padding: 12px 14px; font-size: 12px;
@@ -554,27 +596,18 @@
     .sb-source-label { color: rgba(91,155,245,0.5); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
     .sb-source-value { color: var(--color-blue); font-weight: 500; font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
 
-    /* Similar tickets */
-    .sb-similar-ticket {
-      display: flex; align-items: center; gap: 8px;
-      padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 12px;
-    }
-    .sb-similar-ticket:last-child { border-bottom: none; }
-    .sb-similar-id { color: var(--accent); font-weight: 500; font-family: 'IBM Plex Mono', monospace; font-size: 11px; flex-shrink: 0; }
-    .sb-similar-title { color: var(--text-secondary); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-    /* ── Responsive ── */
+    /* Responsive */
     @media (max-width: 1200px) { }
     @media (max-width: 1024px) {
       .left-nav { display: none; }
-      .body-layout { flex-direction: column; }
-      .right-sidebar { width: 100%; border-left: none; border-top: 1px solid var(--border); }
+      .body-layout { grid-template-columns: 1fr; }
+      .right-sidebar { border-left: none; border-top: 1px solid var(--border); }
     }
   </style>
 </head>
 <body>
 
-  <!-- ══ LEFT NAVIGATION ══ -->
+  <!-- ══ LEFT NAV ══ -->
   <nav class="left-nav">
     <div class="left-nav-header">
       <div class="left-nav-logo">
@@ -610,10 +643,9 @@
     </div>
   </nav>
 
-  <!-- ══ CONTENT AREA ══ -->
+  <!-- ══ CONTENT ══ -->
   <div class="content-area">
 
-    <!-- Back Button -->
     <div class="back-bar">
       <a href="#" class="back-link">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3L5 8l5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -621,17 +653,29 @@
       </a>
     </div>
 
-    <!-- ═══ TOP: Ticket Identity + Current State ═══ -->
+    <!-- ══ TICKET HEADER ══ -->
     <div class="ticket-header">
       <div class="ticket-id-row">
         <span class="ticket-id">TKT-4471</span>
         <span class="badge badge-p2">P2</span>
-        <span class="badge badge-external">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3H3v10h10v-3" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 2h4v4" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 9L14 2" stroke-linecap="round"/></svg>
-          Synced from JSM
-        </span>
+        <span class="badge badge-sla">SLA: 33 min left</span>
+        <a href="#" class="external-link">
+          <span class="ext-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6" stroke-linecap="round"/></svg></span>
+          JSM-VPN-4471
+          <svg class="ext-open" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3H3v10h10v-3" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 2h4v4" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 9L14 2" stroke-linecap="round"/></svg>
+        </a>
       </div>
-      <h1 class="ticket-title">VPN Connection Failure — Pending GlobalProtect Update</h1>
+
+      <div class="ticket-title-row">
+        <h1 class="ticket-title">VPN Connection Failure — Pending GlobalProtect Update</h1>
+        <button class="copy-link-btn" title="Copy ticket link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="ticket-description">
+        I can't connect to VPN. Updated macOS last night and now GlobalProtect just spins. I have a critical data pipeline deploy at 11 AM.
+      </div>
 
       <div class="header-fields">
         <div class="header-field">
@@ -642,7 +686,7 @@
           </div>
         </div>
         <div class="header-field">
-          <div class="header-field-label">Assignee</div>
+          <div class="header-field-label">Owner</div>
           <div class="header-dropdown">
             <div class="header-dropdown-icon avatar">BT</div>
             <span class="header-dropdown-text">Ben Torres</span>
@@ -658,30 +702,56 @@
           </div>
         </div>
       </div>
-
     </div>
 
-    <!-- ═══ BODY: Timeline (main) + Sidebar (supporting) ═══ -->
+    <!-- ══ BODY ══ -->
     <div class="body-layout">
 
-      <!-- ══ MAIN BODY: Latest-first Timeline ══ -->
+      <!-- ══ MAIN TIMELINE ══ -->
       <div class="main-timeline">
 
-        <div class="timeline-header">
-          <div class="timeline-header-row1">
-            <div class="timeline-title">Activity Timeline</div>
-            <div class="tl-view-toggle">
-              <div class="tl-view-btn" data-mode="compact">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h12" stroke-linecap="round"/></svg>
-                Compact
-              </div>
-              <div class="tl-view-btn active" data-mode="expanded">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="3" rx="1"/><rect x="2" y="8" width="12" height="5" rx="1"/></svg>
-                Expanded
-              </div>
+        <!-- Catch-up card -->
+        <div class="catchup-card">
+          <div class="catchup-header">
+            <div class="catchup-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg></div>
+            <span class="catchup-label">Catch up</span>
+          </div>
+          <div class="catchup-body">
+            <strong>Sarah from Data Engineering</strong> reported a VPN connection failure after a macOS update. The self-service agent identified a pending GlobalProtect v6.2.1 update, but the manual install failed. <strong>Ben pushed the update via Jamf</strong> and the workflow is currently polling the device. The ticket's been active for 38 minutes — SLA deadline is 11:00 AM. <strong>Next step is verifying whether the push succeeded and VPN connectivity is restored.</strong>
+          </div>
+          <div class="catchup-actions">
+            <div class="catchup-action primary">Check workflow status</div>
+            <div class="catchup-action">Message Sarah</div>
+            <div class="catchup-action">View device in Axiom</div>
+          </div>
+        </div>
+
+        <!-- Composer (at top of timeline) -->
+        <div class="composer">
+          <div class="composer-header">
+            <span class="composer-title">Add a comment</span>
+            <div class="privacy-toggle private" onclick="this.classList.toggle('private')">
+              <svg class="privacy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke-linecap="round"/></svg>
+              <span class="privacy-toggle-label">Internal only</span>
+              <div class="privacy-toggle-switch"></div>
             </div>
           </div>
-          <div class="timeline-header-row2">
+          <textarea class="composer-textarea" placeholder="Write a comment..."></textarea>
+          <div class="composer-footer">
+            <span class="attach-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Drag to attach
+            </span>
+            <div style="display:flex;gap:8px;">
+              <button class="btn btn-primary btn-sm">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline header -->
+        <div class="timeline-header">
+          <div class="timeline-header-row">
+            <div class="timeline-title">Activity</div>
             <div class="timeline-filters">
               <div class="tl-filter active">All<span class="count">9</span></div>
               <div class="tl-filter">Comments</div>
@@ -691,85 +761,82 @@
             </div>
             <div class="tl-search">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg>
-              <input type="text" placeholder="Search timeline...">
+              <input type="text" placeholder="Search...">
             </div>
           </div>
         </div>
 
+        <!-- ══ TIMELINE — GitHub-style ══ -->
         <div class="timeline">
 
-          <div class="tl-item">
+          <!-- Rich: Running workflow -->
+          <div class="tl-rich">
             <div class="tl-dot workflow"></div>
-            <div class="tl-header">
-              <span class="tl-type-tag workflow">Workflow</span>
-              <span class="tl-actor">System</span>
-              <span class="tl-action">Jamf push command sent to ACME-MC-4471</span>
-              <span class="tl-time">10:25 AM</span>
+            <div class="tl-rich-header">
+              <span class="tl-rich-actor">System</span>
+              <span class="tl-rich-action">Jamf push command sent</span>
+              <span class="tl-rich-time">10:25 AM</span>
             </div>
-            <div class="tl-body">
-              <p>Pushing GlobalProtect v6.2.1 via Jamf. Polling for completion (30s intervals, 10 min timeout).</p>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-dot status"></div>
-            <div class="tl-header">
-              <span class="tl-type-tag status">Status</span>
-              <span class="tl-actor">Ben Torres</span>
-              <span class="tl-action">executed suggested action</span>
-              <span class="tl-time">10:24 AM</span>
-            </div>
-            <div class="tl-field-change">
-              <span class="tl-old">Escalated</span>
-              <span class="tl-arrow">&rarr;</span>
-              <span class="tl-new">In Progress</span>
+            <div class="tl-card">
+              <p>Pushing GlobalProtect v6.2.1 to ACME-MC-4471 via Jamf. Polling for completion (30s intervals, 10 min timeout).</p>
             </div>
           </div>
 
-          <div class="tl-item">
+          <!-- Minor: Status change -->
+          <div class="tl-minor">
+            <div class="tl-dot"></div>
+            <svg class="tl-minor-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M10 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="tl-minor-actor">Ben Torres</span>
+            <span class="tl-minor-action">changed status</span>
+            <span class="tl-old">Escalated</span>
+            <span class="tl-arrow">&rarr;</span>
+            <span class="tl-minor-detail">In Progress</span>
+            <span class="tl-time">10:24 AM</span>
+          </div>
+
+          <!-- Rich: AI suggestion -->
+          <div class="tl-rich">
             <div class="tl-dot ai"></div>
-            <div class="tl-header">
-              <span class="tl-type-tag ai">AI</span>
-              <span class="tl-actor">Operator Intelligence</span>
-              <span class="tl-action">suggested remediation</span>
-              <span class="tl-time">10:22 AM</span>
+            <div class="tl-rich-header">
+              <span class="tl-rich-actor">Operator Intelligence</span>
+              <span class="tl-rich-action">suggested remediation</span>
+              <span class="tl-rich-time">10:22 AM</span>
             </div>
-            <div class="tl-body">
+            <div class="tl-card">
               <p><strong>Suggested action:</strong> Push GP v6.2.1 to ACME-MC-4471 via Jamf.</p>
               <p>14 other devices in the same state — consider bulk push after verification.</p>
               <p style="font-size:11px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">92% confidence · device state + CR-2024-0847 + 3 similar tickets</p>
             </div>
           </div>
 
-          <div class="tl-item">
-            <div class="tl-dot system"></div>
-            <div class="tl-header">
-              <span class="tl-type-tag system">Assignment</span>
-              <span class="tl-actor">System</span>
-              <span class="tl-action">assigned to <strong style="color:var(--text-primary)">Ben Torres</strong> (L2)</span>
-              <span class="tl-time">10:20 AM</span>
-            </div>
+          <!-- Minor: Assignment -->
+          <div class="tl-minor">
+            <div class="tl-dot"></div>
+            <svg class="tl-minor-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke-linecap="round"/></svg>
+            <span class="tl-minor-action">assigned to</span>
+            <span class="tl-minor-detail">Ben Torres</span>
+            <span class="tl-minor-action">(L2 Support)</span>
+            <span class="tl-time">10:20 AM</span>
           </div>
 
-          <div class="tl-item">
-            <div class="tl-dot sync"></div>
-            <div class="tl-header">
-              <span class="tl-type-tag sync">Sync</span>
-              <span class="tl-actor">JSM</span>
-              <span class="tl-action">synced as JSM-VPN-4471</span>
-              <span class="tl-time">10:19 AM</span>
-            </div>
+          <!-- Minor: Sync -->
+          <div class="tl-minor">
+            <div class="tl-dot"></div>
+            <svg class="tl-minor-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8a6 6 0 0110.5-4M14 8a6 6 0 01-10.5 4" stroke-linecap="round"/><path d="M12 2v4h-4M4 14v-4h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="tl-minor-action">synced to JSM as</span>
+            <span class="tl-minor-detail">JSM-VPN-4471</span>
+            <span class="tl-time">10:19 AM</span>
           </div>
 
-          <div class="tl-item">
-            <div class="tl-dot status"></div>
-            <div class="tl-header">
-              <span class="tl-type-tag status">Escalated</span>
-              <span class="tl-actor">Self-Service Agent</span>
-              <span class="tl-action">escalated to operator queue</span>
-              <span class="tl-time">10:18 AM</span>
+          <!-- Rich: Escalation with remediation log -->
+          <div class="tl-rich">
+            <div class="tl-dot comment"></div>
+            <div class="tl-rich-header">
+              <span class="tl-rich-actor">Self-Service Agent</span>
+              <span class="tl-rich-action">escalated to operator queue</span>
+              <span class="tl-rich-time">10:18 AM</span>
             </div>
-            <div class="tl-body">
+            <div class="tl-card">
               <p><strong>Remediation log:</strong></p>
               <p>&#x2705; Identified pending GP v6.2.1 update<br>
                  &#x2705; User attempted manual install via Jamf Self Service<br>
@@ -779,94 +846,61 @@
             </div>
           </div>
 
-          <div class="tl-item">
+          <!-- Rich: Internal note -->
+          <div class="tl-rich">
             <div class="tl-dot comment"></div>
-            <div class="tl-header">
-              <span class="tl-type-tag internal">Internal</span>
-              <span class="tl-actor">Self-Service Agent</span>
-              <span class="tl-action">added a note</span>
-              <span class="tl-time">10:15 AM</span>
+            <div class="tl-rich-header">
+              <span class="tl-rich-actor">Self-Service Agent</span>
+              <span class="tl-rich-action">added a note</span>
+              <span class="tl-visibility"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="12" height="7" rx="1.5"/><path d="M5 7V5a3 3 0 016 0v2" stroke-linecap="round"/></svg> Internal</span>
+              <span class="tl-rich-time">10:15 AM</span>
             </div>
-            <div class="tl-body internal-note">
+            <div class="tl-card internal">
               <p>12 GB free storage confirmed. Sufficient for GP update (~200 MB). Failure not disk-related. Escalating.</p>
             </div>
           </div>
 
-          <div class="tl-item">
-            <div class="tl-dot status"></div>
-            <div class="tl-header">
-              <span class="tl-type-tag status">Priority</span>
-              <span class="tl-actor">System</span>
-              <span class="tl-action">auto-promoted (urgency detected)</span>
-              <span class="tl-time">9:48 AM</span>
-            </div>
-            <div class="tl-field-change">
-              <span class="tl-old">P3</span>
-              <span class="tl-arrow">&rarr;</span>
-              <span class="tl-new">P2</span>
-            </div>
+          <!-- Minor: Priority change -->
+          <div class="tl-minor">
+            <div class="tl-dot"></div>
+            <svg class="tl-minor-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M4 7l4-4 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="tl-minor-action">priority auto-promoted</span>
+            <span class="tl-old">P3</span>
+            <span class="tl-arrow">&rarr;</span>
+            <span class="tl-minor-detail">P2</span>
+            <span class="tl-minor-action">(urgency detected)</span>
+            <span class="tl-time">9:48 AM</span>
           </div>
 
-          <div class="tl-item">
+          <!-- Rich: Ticket created -->
+          <div class="tl-rich">
             <div class="tl-dot created"></div>
-            <div class="tl-header">
-              <span class="tl-type-tag system">Created</span>
-              <span class="tl-actor">Self-Service Agent</span>
-              <span class="tl-action">ticket auto-created</span>
-              <span class="tl-time">9:47 AM</span>
+            <div class="tl-rich-header">
+              <span class="tl-rich-actor">Self-Service Agent</span>
+              <span class="tl-rich-action">ticket created</span>
+              <span class="tl-rich-time">9:47 AM</span>
             </div>
-            <div class="tl-body">
+            <div class="tl-card">
               <p>"I can't connect to VPN. Updated macOS last night and now GlobalProtect just spins. I have a critical data pipeline deploy at 11 AM."</p>
             </div>
           </div>
 
         </div>
 
-        <!-- Composer -->
-        <div class="composer">
-          <div class="composer-toggle">
-            <div class="composer-toggle-btn active">Comment</div>
-            <div class="composer-toggle-btn internal">Internal Note</div>
-          </div>
-          <textarea class="composer-textarea" placeholder="Add a comment..."></textarea>
-          <div class="composer-footer">
-            <span class="attach-hint">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Drag to attach files
-            </span>
-            <div style="display:flex;gap:8px;">
-              <button class="btn btn-ghost btn-sm">Cancel</button>
-              <button class="btn btn-primary btn-sm">Add</button>
-            </div>
-          </div>
-        </div>
-
       </div>
 
-      <!-- ══ RIGHT SIDEBAR: Supporting Sections ══ -->
+      <!-- ══ RIGHT SIDEBAR ══ -->
       <div class="right-sidebar">
 
-        <!-- Section: Overview / Details -->
+        <!-- Overview / Details — most relevant first -->
         <div class="sb-section">
           <div class="sb-section-header">
             <div class="sb-section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <span class="sb-section-label">Overview / Details</span>
+            <span class="sb-section-label">Overview</span>
             <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
           <div class="sb-section-body">
-            <div class="detail-row">
-              <span class="detail-label">Type</span>
-              <span class="detail-value">Incident</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Impact</span>
-              <span class="detail-value">Individual</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Urgency</span>
-              <span class="detail-value">High</span>
-            </div>
-            <div style="margin-top:14px;margin-bottom:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);">People</div>
+            <div class="sub-heading" style="margin-top:0;">People</div>
             <div class="detail-row">
               <span class="detail-label">Requester</span>
               <span class="detail-value"><a href="#">Sarah Chen</a></span>
@@ -884,29 +918,21 @@
               <span class="detail-value">IT Support</span>
             </div>
 
-            <div style="margin-top:14px;margin-bottom:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);">Device</div>
+            <div class="sub-heading">Classification</div>
             <div class="detail-row">
-              <span class="detail-label">Asset</span>
-              <span class="detail-value"><a href="#">ACME-MC-4471</a></span>
+              <span class="detail-label">Type</span>
+              <span class="detail-value">Incident</span>
             </div>
             <div class="detail-row">
-              <span class="detail-label">Model</span>
-              <span class="detail-value">MacBook Pro M3, 16"</span>
+              <span class="detail-label">Impact</span>
+              <span class="detail-value">Individual</span>
             </div>
             <div class="detail-row">
-              <span class="detail-label">OS</span>
-              <span class="detail-value">macOS 15.3</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">GlobalProtect</span>
-              <span class="detail-value" style="color:var(--color-orange);">v6.1.0 (pending)</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Jamf</span>
-              <span class="detail-value" style="color:var(--color-teal);">Managed, compliant</span>
+              <span class="detail-label">Urgency</span>
+              <span class="detail-value">High</span>
             </div>
 
-            <div style="margin-top:14px;margin-bottom:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);">Dates</div>
+            <div class="sub-heading">Dates</div>
             <div class="detail-row">
               <span class="detail-label">Created</span>
               <span class="detail-value" style="font-family:'IBM Plex Mono',monospace;font-size:12px;">Apr 1, 9:47 AM</span>
@@ -920,7 +946,7 @@
               <span class="detail-value" style="color:var(--color-red);font-family:'IBM Plex Mono',monospace;font-size:12px;">Apr 1, 11:00 AM</span>
             </div>
 
-            <div style="margin-top:14px;margin-bottom:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);">Tags</div>
+            <div class="sub-heading">Tags</div>
             <div class="tag-list">
               <span class="tag">vpn</span>
               <span class="tag">globalprotect</span>
@@ -930,11 +956,11 @@
           </div>
         </div>
 
-        <!-- Section: Workflow Execution -->
+        <!-- Workflow Execution -->
         <div class="sb-section">
           <div class="sb-section-header">
             <div class="sb-section-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <span class="sb-section-label">Workflow Execution</span>
+            <span class="sb-section-label">Workflow</span>
             <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
           <div class="sb-section-body">
@@ -946,22 +972,10 @@
               </div>
             </div>
             <div class="sb-workflow-steps">
-              <div class="sb-wf-step">
-                <div class="sb-wf-bar done"></div>
-                <div class="sb-wf-label done">Send</div>
-              </div>
-              <div class="sb-wf-step">
-                <div class="sb-wf-bar active"></div>
-                <div class="sb-wf-label active">Poll</div>
-              </div>
-              <div class="sb-wf-step">
-                <div class="sb-wf-bar pending"></div>
-                <div class="sb-wf-label">Verify</div>
-              </div>
-              <div class="sb-wf-step">
-                <div class="sb-wf-bar pending"></div>
-                <div class="sb-wf-label">Confirm</div>
-              </div>
+              <div class="sb-wf-step"><div class="sb-wf-bar done"></div><div class="sb-wf-label done">Send</div></div>
+              <div class="sb-wf-step"><div class="sb-wf-bar active"></div><div class="sb-wf-label active">Poll</div></div>
+              <div class="sb-wf-step"><div class="sb-wf-bar pending"></div><div class="sb-wf-label">Verify</div></div>
+              <div class="sb-wf-step"><div class="sb-wf-bar pending"></div><div class="sb-wf-label">Confirm</div></div>
             </div>
             <div style="margin-top:12px;">
               <button class="btn btn-primary btn-sm" style="width:100%;">Run Workflow</button>
@@ -969,7 +983,7 @@
           </div>
         </div>
 
-        <!-- Section: AI Reasoning / Enrichment -->
+        <!-- AI Reasoning -->
         <div class="sb-section">
           <div class="sb-section-header">
             <div class="sb-section-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg></div>
@@ -980,18 +994,16 @@
             <div class="sb-ai-card">
               <p>Device received macOS 15.3 update but GP client update <strong>(v6.2.1)</strong> still pending. Self-service failed due to permissions. <strong>Jamf admin push recommended.</strong> 14 other devices in same state.</p>
             </div>
-            <div class="sb-ai-suggestions">
-              <div class="sb-ai-suggestion">
-                <span class="sb-ai-suggestion-title">Push GP v6.2.1 via Jamf</span>
-                <span class="sb-ai-confidence">92%</span>
-              </div>
-              <div class="sb-ai-suggestion">
-                <span class="sb-ai-suggestion-title">Bulk push to 14 devices</span>
-                <span class="sb-ai-confidence">88%</span>
-              </div>
+            <div class="sb-ai-suggestion">
+              <span class="sb-ai-suggestion-title">Push GP v6.2.1 via Jamf</span>
+              <span class="sb-ai-confidence">92%</span>
+            </div>
+            <div class="sb-ai-suggestion">
+              <span class="sb-ai-suggestion-title">Bulk push to 14 devices</span>
+              <span class="sb-ai-confidence">88%</span>
             </div>
 
-            <div style="margin-top:14px;margin-bottom:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);">Similar Tickets</div>
+            <div class="sub-heading" style="margin-top:14px;">Similar Tickets</div>
             <div class="sb-similar-ticket">
               <span class="sb-similar-id">TKT-4480</span>
               <span class="sb-similar-title">VPN failure — GP update pending</span>
@@ -1013,17 +1025,48 @@
           </div>
         </div>
 
-        <!-- Section: Source / Integration -->
-        <div class="sb-section">
+        <!-- Device -->
+        <div class="sb-section collapsed">
+          <div class="sb-section-header">
+            <div class="sb-section-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round"/></svg></div>
+            <span class="sb-section-label">Device</span>
+            <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div class="sb-section-body">
+            <div class="detail-row">
+              <span class="detail-label">Asset</span>
+              <span class="detail-value"><a href="#">ACME-MC-4471</a></span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Model</span>
+              <span class="detail-value">MacBook Pro M3, 16"</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">OS</span>
+              <span class="detail-value">macOS 15.3</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">GlobalProtect</span>
+              <span class="detail-value" style="color:var(--color-orange);">v6.1.0 (pending)</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Jamf</span>
+              <span class="detail-value" style="color:var(--color-teal);">Managed, compliant</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Source -->
+        <div class="sb-section collapsed">
           <div class="sb-section-header">
             <div class="sb-section-icon"><svg viewBox="0 0 24 24"><path d="M10 6H6v12h12v-4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 4h4v4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 13L20 4" stroke-linecap="round"/></svg></div>
-            <span class="sb-section-label">Source / Integration</span>
+            <span class="sb-section-label">Source</span>
             <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
           <div class="sb-section-body">
             <div class="sb-source-card">
               <div class="sb-source-header">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3H3v10h10v-3" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 2h4v4" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 9L14 2" stroke-linecap="round"/></svg>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6" stroke-linecap="round"/></svg>
                 Jira Service Management
               </div>
               <div class="sb-source-row">
@@ -1043,13 +1086,9 @@
         </div>
 
       </div>
-      <!-- end right-sidebar -->
 
     </div>
-    <!-- end body-layout -->
-
   </div>
-  <!-- end content-area -->
 
 <script>
   // Sidebar collapse
@@ -1057,28 +1096,6 @@
     header.addEventListener('click', () => {
       header.closest('.sb-section').classList.toggle('collapsed');
     });
-  });
-
-  // Compact / Expanded toggle
-  const timeline = document.querySelector('.timeline');
-  document.querySelectorAll('.tl-view-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tl-view-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      if (btn.dataset.mode === 'compact') {
-        timeline.classList.add('compact');
-      } else {
-        timeline.classList.remove('compact');
-        document.querySelectorAll('.tl-item.expanded').forEach(i => i.classList.remove('expanded'));
-      }
-    });
-  });
-
-  // In compact mode, click a timeline row to expand/collapse it
-  timeline.addEventListener('click', (e) => {
-    if (!timeline.classList.contains('compact')) return;
-    const item = e.target.closest('.tl-item');
-    if (item) item.classList.toggle('expanded');
   });
 </script>
 
