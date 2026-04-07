@@ -802,15 +802,15 @@
               <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             </div>
             <div class="queue-menu status-menu">
-              <div class="status-option selected" data-queue="Engineering" onclick="selectQueue(this)">
+              <div class="status-option selected" data-queue="Engineering">
                 <span class="status-option-label">Engineering</span>
                 <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
-              <div class="status-option" data-queue="HR" onclick="selectQueue(this)">
+              <div class="status-option" data-queue="HR">
                 <span class="status-option-label">HR</span>
                 <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
-              <div class="status-option" data-queue="Marketing" onclick="selectQueue(this)">
+              <div class="status-option" data-queue="Marketing">
                 <span class="status-option-label">Marketing</span>
                 <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
@@ -1218,11 +1218,12 @@
   // Status dropdown
   const statusMenu = document.querySelector('.status-menu');
   const statusBtn = document.querySelector('.header-dropdown[data-status]');
+  const statusWrapper = document.querySelector('.status-dropdown-wrapper');
 
-  document.querySelectorAll('.status-option').forEach(option => {
+  statusWrapper.querySelectorAll('.status-option').forEach(option => {
     option.addEventListener('click', (e) => {
       e.stopPropagation();
-      document.querySelectorAll('.status-option').forEach(o => o.classList.remove('selected'));
+      statusWrapper.querySelectorAll('.status-option').forEach(o => o.classList.remove('selected'));
       option.classList.add('selected');
       statusBtn.dataset.status = option.dataset.value;
       statusBtn.querySelector('.header-dropdown-text').textContent = option.dataset.label;
@@ -1231,13 +1232,18 @@
   });
 
   // Queue dropdown
-  function selectQueue(option) {
-    const wrapper = option.closest('.queue-dropdown-wrapper');
-    wrapper.querySelectorAll('.status-option').forEach(o => o.classList.remove('selected'));
-    option.classList.add('selected');
-    wrapper.querySelector('.queue-selected-text').textContent = option.dataset.queue;
-    wrapper.querySelector('.queue-menu').classList.remove('open');
-  }
+  const queueWrapper = document.querySelector('.queue-dropdown-wrapper');
+  const queueMenu = document.querySelector('.queue-menu');
+
+  queueWrapper.querySelectorAll('.status-option').forEach(option => {
+    option.addEventListener('click', (e) => {
+      e.stopPropagation();
+      queueWrapper.querySelectorAll('.status-option').forEach(o => o.classList.remove('selected'));
+      option.classList.add('selected');
+      queueWrapper.querySelector('.queue-selected-text').textContent = option.dataset.queue;
+      queueMenu.classList.remove('open');
+    });
+  });
 
   // Close dropdowns when clicking outside
   document.addEventListener('click', (e) => {
@@ -1245,7 +1251,7 @@
       statusMenu.classList.remove('open');
     }
     if (!e.target.closest('.queue-dropdown-wrapper')) {
-      document.querySelector('.queue-menu').classList.remove('open');
+      queueMenu.classList.remove('open');
     }
   });
 </script>
