@@ -250,6 +250,7 @@
     }
     .timeline-header-row2 {
       display: flex; align-items: center; gap: 12px;
+      justify-content: flex-start;
     }
     .tl-search {
       display: flex; align-items: center; gap: 8px;
@@ -343,13 +344,15 @@
     .tl-dot.created { border-color: var(--accent); background: var(--accent); }
 
     .tl-header {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 13px; color: var(--text-secondary); margin-bottom: 5px; flex-wrap: wrap;
+      display: flex; align-items: baseline; gap: 8px;
+      font-size: 13px; color: var(--text-secondary); margin-bottom: 5px;
     }
-    .tl-actor { font-weight: 600; color: var(--text-primary); }
+    .tl-actor { font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+    .tl-action { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .tl-time {
       margin-left: auto; font-size: 11px; color: var(--text-muted);
       white-space: nowrap; font-family: 'IBM Plex Mono', monospace;
+      flex-shrink: 0;
     }
     .tl-type-tag {
       font-size: 11px; font-weight: 600; text-transform: uppercase;
@@ -700,7 +703,7 @@
             <div class="tl-header">
               <span class="tl-type-tag workflow">Workflow</span>
               <span class="tl-actor">System</span>
-              <span>Jamf push command sent to ACME-MC-4471</span>
+              <span class="tl-action">Jamf push command sent to ACME-MC-4471</span>
               <span class="tl-time">10:25 AM</span>
             </div>
             <div class="tl-body">
@@ -713,7 +716,7 @@
             <div class="tl-header">
               <span class="tl-type-tag status">Status</span>
               <span class="tl-actor">Ben Torres</span>
-              <span>executed suggested action</span>
+              <span class="tl-action">executed suggested action</span>
               <span class="tl-time">10:24 AM</span>
             </div>
             <div class="tl-field-change">
@@ -728,7 +731,7 @@
             <div class="tl-header">
               <span class="tl-type-tag ai">AI</span>
               <span class="tl-actor">Operator Intelligence</span>
-              <span>suggested remediation</span>
+              <span class="tl-action">suggested remediation</span>
               <span class="tl-time">10:22 AM</span>
             </div>
             <div class="tl-body">
@@ -743,7 +746,7 @@
             <div class="tl-header">
               <span class="tl-type-tag system">Assignment</span>
               <span class="tl-actor">System</span>
-              <span>assigned to <strong style="color:var(--text-primary)">Ben Torres</strong> (L2)</span>
+              <span class="tl-action">assigned to <strong style="color:var(--text-primary)">Ben Torres</strong> (L2)</span>
               <span class="tl-time">10:20 AM</span>
             </div>
           </div>
@@ -753,7 +756,7 @@
             <div class="tl-header">
               <span class="tl-type-tag sync">Sync</span>
               <span class="tl-actor">JSM</span>
-              <span>synced as JSM-VPN-4471</span>
+              <span class="tl-action">synced as JSM-VPN-4471</span>
               <span class="tl-time">10:19 AM</span>
             </div>
           </div>
@@ -763,7 +766,7 @@
             <div class="tl-header">
               <span class="tl-type-tag status">Escalated</span>
               <span class="tl-actor">Self-Service Agent</span>
-              <span>escalated to operator queue</span>
+              <span class="tl-action">escalated to operator queue</span>
               <span class="tl-time">10:18 AM</span>
             </div>
             <div class="tl-body">
@@ -781,7 +784,7 @@
             <div class="tl-header">
               <span class="tl-type-tag internal">Internal</span>
               <span class="tl-actor">Self-Service Agent</span>
-              <span>added a note</span>
+              <span class="tl-action">added a note</span>
               <span class="tl-time">10:15 AM</span>
             </div>
             <div class="tl-body internal-note">
@@ -794,7 +797,7 @@
             <div class="tl-header">
               <span class="tl-type-tag status">Priority</span>
               <span class="tl-actor">System</span>
-              <span>auto-promoted (urgency detected)</span>
+              <span class="tl-action">auto-promoted (urgency detected)</span>
               <span class="tl-time">9:48 AM</span>
             </div>
             <div class="tl-field-change">
@@ -809,7 +812,7 @@
             <div class="tl-header">
               <span class="tl-type-tag system">Created</span>
               <span class="tl-actor">Self-Service Agent</span>
-              <span>ticket auto-created</span>
+              <span class="tl-action">ticket auto-created</span>
               <span class="tl-time">9:47 AM</span>
             </div>
             <div class="tl-body">
