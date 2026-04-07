@@ -207,11 +207,57 @@
       cursor: pointer; transition: border-color 0.15s; min-height: 40px;
     }
     .header-dropdown:hover { border-color: rgba(255,255,255,0.2); }
-    .header-dropdown.status-in-progress {
-      background: transparent; border-color: var(--color-blue);
+    /* Status dropdown colors */
+    .status-dropdown-wrapper { position: relative; }
+    .header-dropdown[data-status="open"] { background: rgba(91,155,245,0.15); border-color: var(--color-blue); }
+    .header-dropdown[data-status="open"] .header-dropdown-text { color: var(--color-blue); }
+    .header-dropdown[data-status="open"] .header-dropdown-chevron { color: var(--color-blue); }
+    .header-dropdown[data-status="in-progress"] { background: transparent; border-color: var(--color-blue); }
+    .header-dropdown[data-status="in-progress"] .header-dropdown-text { color: var(--color-blue); }
+    .header-dropdown[data-status="in-progress"] .header-dropdown-chevron { color: var(--color-blue); }
+    .header-dropdown[data-status="waiting"] { background: transparent; border-color: var(--color-gold); }
+    .header-dropdown[data-status="waiting"] .header-dropdown-text { color: var(--color-gold); }
+    .header-dropdown[data-status="waiting"] .header-dropdown-chevron { color: var(--color-gold); }
+    .header-dropdown[data-status="pending"] { background: transparent; border-color: var(--color-orange); }
+    .header-dropdown[data-status="pending"] .header-dropdown-text { color: var(--color-orange); }
+    .header-dropdown[data-status="pending"] .header-dropdown-chevron { color: var(--color-orange); }
+    .header-dropdown[data-status="resolved"] { background: transparent; border-color: var(--color-green); }
+    .header-dropdown[data-status="resolved"] .header-dropdown-text { color: var(--color-green); }
+    .header-dropdown[data-status="resolved"] .header-dropdown-chevron { color: var(--color-green); }
+    .header-dropdown[data-status="closed"] { background: transparent; border-color: var(--text-muted); }
+    .header-dropdown[data-status="closed"] .header-dropdown-text { color: var(--text-muted); }
+    .header-dropdown[data-status="closed"] .header-dropdown-chevron { color: var(--text-muted); }
+
+    /* Dropdown menu */
+    .status-menu {
+      display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: var(--bg-card); border: 1px solid var(--border-strong);
+      border-radius: var(--radius); padding: 4px; z-index: 50;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
-    .header-dropdown.status-in-progress .header-dropdown-text { color: var(--color-blue); }
-    .header-dropdown.status-in-progress .header-dropdown-chevron { color: var(--color-blue); }
+    .status-menu.open { display: block; }
+    .status-option {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px; border-radius: 6px; cursor: pointer;
+      font-size: 13px; font-weight: 500; transition: background 0.1s;
+    }
+    .status-option:hover { background: var(--bg-glass); }
+    .status-option.selected { background: var(--bg-glass); }
+    .status-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .status-dot.open { background: var(--color-blue); }
+    .status-dot.in-progress { background: var(--color-blue); }
+    .status-dot.waiting { background: var(--color-gold); }
+    .status-dot.pending { background: var(--color-orange); }
+    .status-dot.resolved { background: var(--color-green); }
+    .status-dot.closed { background: var(--text-muted); }
+    .status-option-label { color: var(--text-primary); }
+    .status-option-check {
+      margin-left: auto; color: var(--accent); width: 14px; height: 14px;
+      display: none;
+    }
+    .status-option.selected .status-option-check { display: block; }
     .header-dropdown-icon {
       width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; color: var(--text-muted);
@@ -680,9 +726,43 @@
       <div class="header-fields">
         <div class="header-field">
           <div class="header-field-label">Status</div>
-          <div class="header-dropdown status-in-progress">
-            <span class="header-dropdown-text">In Progress</span>
-            <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="status-dropdown-wrapper">
+            <div class="header-dropdown" data-status="in-progress" onclick="document.querySelector('.status-menu').classList.toggle('open')">
+              <span class="header-dropdown-text">In Progress</span>
+              <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+            <div class="status-menu">
+              <div class="status-option" data-value="open" data-label="Open">
+                <div class="status-dot open"></div>
+                <span class="status-option-label">Open</span>
+                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="status-option selected" data-value="in-progress" data-label="In Progress">
+                <div class="status-dot in-progress"></div>
+                <span class="status-option-label">In Progress</span>
+                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="status-option" data-value="waiting" data-label="Waiting for Reply">
+                <div class="status-dot waiting"></div>
+                <span class="status-option-label">Waiting for Reply</span>
+                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="status-option" data-value="pending" data-label="Pending">
+                <div class="status-dot pending"></div>
+                <span class="status-option-label">Pending</span>
+                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="status-option" data-value="resolved" data-label="Resolved">
+                <div class="status-dot resolved"></div>
+                <span class="status-option-label">Resolved</span>
+                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="status-option" data-value="closed" data-label="Closed">
+                <div class="status-dot closed"></div>
+                <span class="status-option-label">Closed</span>
+                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
           </div>
         </div>
         <div class="header-field">
@@ -1096,6 +1176,28 @@
     header.addEventListener('click', () => {
       header.closest('.sb-section').classList.toggle('collapsed');
     });
+  });
+
+  // Status dropdown
+  const statusMenu = document.querySelector('.status-menu');
+  const statusBtn = document.querySelector('.header-dropdown[data-status]');
+
+  document.querySelectorAll('.status-option').forEach(option => {
+    option.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('.status-option').forEach(o => o.classList.remove('selected'));
+      option.classList.add('selected');
+      statusBtn.dataset.status = option.dataset.value;
+      statusBtn.querySelector('.header-dropdown-text').textContent = option.dataset.label;
+      statusMenu.classList.remove('open');
+    });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.status-dropdown-wrapper')) {
+      statusMenu.classList.remove('open');
+    }
   });
 </script>
 
