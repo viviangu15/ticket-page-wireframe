@@ -549,10 +549,21 @@
       overflow-y: auto; min-width: 0;
     }
 
+    /* Sidebar context hint */
+    .sb-context-hint {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px; color: var(--text-muted);
+      display: flex; align-items: center; gap: 6px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .sb-context-hint svg { width: 12px; height: 12px; flex-shrink: 0; opacity: 0.5; }
+
     .sb-section { border-bottom: 1px solid var(--border); }
     .sb-section-header {
       display: flex; align-items: center; gap: 10px;
       padding: 14px 20px; cursor: pointer; transition: background 0.12s;
+      flex-wrap: wrap;
     }
     .sb-section-header:hover { background: var(--bg-glass); }
     .sb-section-icon {
@@ -565,6 +576,11 @@
       font-family: 'IBM Plex Mono', monospace;
       font-size: 11px; font-weight: 600; text-transform: uppercase;
       letter-spacing: 0.06em; color: var(--text-primary); flex: 1;
+    }
+    .sb-section-reason {
+      font-size: 10px; color: var(--text-muted);
+      font-family: 'IBM Plex Mono', monospace;
+      width: 100%; padding-left: 34px; margin-top: -2px;
     }
     .sb-section-chevron { color: var(--text-muted); display: flex; align-items: center; }
     .sb-section-chevron svg { width: 14px; height: 14px; transition: transform 0.2s; }
@@ -1057,8 +1073,13 @@
 
       </div>
 
-      <!-- ══ RIGHT SIDEBAR — progressive disclosure: actionable → context → investigation ══ -->
+      <!-- ══ RIGHT SIDEBAR — progressive disclosure ══ -->
       <div class="right-sidebar">
+
+        <div class="sb-context-hint">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M4 7l4-4 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Sorted by relevance to this ticket
+        </div>
 
         <!-- 1. Workflow — active, needs attention NOW -->
         <div class="sb-section">
@@ -1066,6 +1087,7 @@
             <div class="sb-section-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <span class="sb-section-label">Workflow</span>
             <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="sb-section-reason">Running now — polling device</span>
           </div>
           <div class="sb-section-body">
             <div class="sb-workflow-card">
@@ -1093,6 +1115,7 @@
             <div class="sb-section-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg></div>
             <span class="sb-section-label">AI Reasoning</span>
             <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="sb-section-reason">2 suggestions pending review</span>
           </div>
           <div class="sb-section-body">
             <div class="sb-ai-card">
@@ -1135,6 +1158,7 @@
             <div class="sb-section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <span class="sb-section-label">Overview</span>
             <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="sb-section-reason">Key fields visible in header</span>
           </div>
           <div class="sb-section-body">
             <div class="sub-heading" style="margin-top:0;">People</div>
@@ -1199,6 +1223,7 @@
             <div class="sb-section-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round"/></svg></div>
             <span class="sb-section-label">Device</span>
             <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="sb-section-reason">ACME-MC-4471 — GP update pending</span>
           </div>
           <div class="sb-section-body">
             <div class="detail-row">
