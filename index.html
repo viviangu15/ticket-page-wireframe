@@ -392,7 +392,7 @@
       display: none;
       border: 1px solid var(--border-strong);
       border-radius: var(--radius);
-      overflow: hidden;
+      overflow: visible;
     }
     .composer-inline.open .composer-collapsed { display: none; }
     .composer-inline.open .composer-expanded { display: block; }
@@ -408,6 +408,7 @@
     .composer-toolbar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 8px 14px; background: var(--bg-glass);
+      border-radius: 0 0 var(--radius) var(--radius);
     }
     .composer-toolbar-left {
       display: flex; align-items: center; gap: 10px;
