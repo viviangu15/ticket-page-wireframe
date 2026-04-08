@@ -193,12 +193,15 @@
       line-height: 1.6;
     }
 
-    /* Header dropdown fields — constrained to timeline column width */
+    /* Header dropdown fields — right edge aligns with catch-up card */
     .header-fields {
       display: flex;
       gap: 12px;
       margin-top: 14px;
-      max-width: 60%;
+      /* Catch-up card right edge = 60% of body - 32px timeline padding.
+         Header content starts at 32px padding. So max-width = 60% - 64px
+         (but % is relative to parent which includes padding, so adjust) */
+      width: calc(60% - 32px);
     }
     .header-fields-group {
       display: flex; gap: 12px;
