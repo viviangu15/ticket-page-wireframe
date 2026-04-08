@@ -649,12 +649,12 @@
     .sb-workflow-steps { display: flex; gap: 3px; margin-top: 12px; }
     .sb-wf-step { flex: 1; }
     .sb-wf-bar { height: 3px; border-radius: 2px; margin-bottom: 4px; }
-    .sb-wf-bar.done { background: var(--text-secondary); }
-    .sb-wf-bar.active { background: var(--text-primary); animation: pulse 2s ease-in-out infinite; }
+    .sb-wf-bar.done { background: var(--accent); }
+    .sb-wf-bar.active { background: var(--accent); opacity: 0.5; animation: pulse 2s ease-in-out infinite; }
     .sb-wf-bar.pending { background: var(--border); }
     .sb-wf-label { font-size: 9px; color: var(--text-muted); text-align: center; font-family: 'IBM Plex Mono', monospace; }
-    .sb-wf-label.done { color: var(--text-secondary); }
-    .sb-wf-label.active { color: var(--text-primary); font-weight: 600; }
+    .sb-wf-label.done { color: var(--accent); }
+    .sb-wf-label.active { color: var(--accent); font-weight: 600; }
 
     /* AI card in sidebar */
     .sb-ai-card {
