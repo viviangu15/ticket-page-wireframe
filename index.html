@@ -193,16 +193,17 @@
       line-height: 1.6;
     }
 
-    /* Header dropdown fields */
+    /* Header dropdown fields — constrained to timeline column width */
     .header-fields {
       display: flex;
-      gap: 16px;
+      gap: 12px;
       margin-top: 14px;
+      max-width: 60%;
     }
     .header-fields-group {
-      display: flex; gap: 16px;
+      display: flex; gap: 12px;
     }
-    .header-field { flex: 1; min-width: 0; }
+    .header-field { flex: none; }
     .header-field-label {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 10px; font-weight: 600; text-transform: uppercase;
