@@ -28,6 +28,7 @@
       --color-orange: #fb923c;
       --radius: 8px;
       --radius-lg: 12px;
+      --left-nav-width: 210px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -48,9 +49,9 @@
       overflow: hidden;
     }
 
-    /* ══ LEFT NAV (minimal end-user version) ══ */
+    /* ══ LEFT NAV ══ */
     .left-nav {
-      width: 210px;
+      width: var(--left-nav-width);
       background: var(--bg-raised);
       border-right: 1px solid var(--border);
       display: flex; flex-direction: column;
@@ -70,14 +71,6 @@
       font-family: 'Hanken Grotesk', sans-serif;
       font-weight: 700; font-size: 17px; color: var(--text-primary); letter-spacing: -0.3px;
     }
-
-    .nav-section-label {
-      padding: 8px 16px 6px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.08em; color: var(--text-muted);
-    }
-
     .left-nav-collapse-btn {
       width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
       color: var(--text-muted); cursor: pointer; border-radius: 4px;
@@ -91,19 +84,6 @@
     .nav-item:hover { color: var(--text-primary); background: var(--bg-glass); }
     .nav-item.active { color: var(--text-primary); background: rgba(255,255,255,0.07); }
     .nav-item svg { width: 18px; height: 18px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.5; }
-    .nav-item-badge {
-      margin-left: auto; font-size: 10px; font-weight: 600;
-      background: var(--accent-soft); color: var(--accent);
-      padding: 1px 6px; border-radius: 999px;
-      font-family: 'IBM Plex Mono', monospace;
-    }
-    .nav-item-time {
-      margin-left: auto; font-size: 10px; color: var(--text-muted);
-      font-family: 'IBM Plex Mono', monospace;
-    }
-
-    .nav-divider { height: 1px; background: var(--border); margin: 8px 16px; }
-
     .ask-bar-container { padding: 8px 12px 12px; }
     .ask-bar {
       display: flex; align-items: center; gap: 8px;
@@ -116,9 +96,7 @@
     .ask-bar-actions { display: flex; gap: 6px; align-items: center; }
     .ask-bar-actions svg { width: 14px; height: 14px; color: var(--text-muted); cursor: pointer; }
     .left-nav-footer { padding: 12px 12px 16px; border-top: 1px solid var(--border); }
-    .nav-user {
-      display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer;
-    }
+    .nav-user { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer; }
     .nav-user-avatar {
       width: 30px; height: 30px; border-radius: 50%; background: #6366f1;
       display: flex; align-items: center; justify-content: center;
