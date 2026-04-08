@@ -227,10 +227,26 @@
 
     /* ══ TICKET PREVIEW (right side) ══ */
     .ticket-panel {
-      width: 400px; flex-shrink: 0;
+      width: 480px; flex-shrink: 0;
       background: var(--bg-raised);
       overflow-y: auto;
       display: flex; flex-direction: column;
+      position: relative;
+      min-width: 300px;
+      max-width: 700px;
+    }
+
+    /* Drag handle to resize */
+    .resize-handle {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 4px; cursor: col-resize;
+      background: transparent;
+      z-index: 10;
+      transition: background 0.15s;
+    }
+    .resize-handle:hover,
+    .resize-handle.active {
+      background: var(--accent);
     }
 
     .ticket-panel-header {
@@ -553,6 +569,7 @@
 
     <!-- ══ TICKET PREVIEW (right) ══ -->
     <div class="ticket-panel">
+      <div class="resize-handle" id="resizeHandle"></div>
 
       <div class="ticket-panel-header">
         <span class="ticket-panel-title">Ticket Preview</span>
@@ -649,6 +666,36 @@
   </div>
 
 <script>
+  // Resizable panel
+  const handle = document.getElementById('resizeHandle');
+  const panel = document.querySelector('.ticket-panel');
+  let isResizing = false;
+
+  handle.addEventListener('mousedown', (e) => {
+    isResizing = true;
+    handle.classList.add('active');
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isResizing) return;
+    const newWidth = document.body.clientWidth - e.clientX;
+    if (newWidth >= 300 && newWidth <= 700) {
+      panel.style.width = newWidth + 'px';
+    }
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (isResizing) {
+      isResizing = false;
+      handle.classList.remove('active');
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    }
+  });
+
   // Quick actions type into chat
   function typeInChat(text) {
     const input = document.querySelector('.chat-input');
