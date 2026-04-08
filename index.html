@@ -203,7 +203,7 @@
     .header-fields-group {
       display: flex; gap: 12px;
     }
-    .header-field { flex: 1; min-width: 0; }
+    .header-field { width: 0; flex: 1 1 0%; min-width: 0; }
     .header-field-label {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 10px; font-weight: 600; text-transform: uppercase;
@@ -759,7 +759,6 @@
       </div>
 
       <div class="header-fields">
-        <div class="header-fields-group">
         <div class="header-field">
           <div class="header-field-label">Status</div>
           <div class="status-dropdown-wrapper">
@@ -817,8 +816,6 @@
             <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </div>
-        </div>
-        <div class="header-fields-group">
         <div class="header-field">
           <div class="header-field-label">Queue</div>
           <div class="queue-dropdown-wrapper" style="position:relative;">
@@ -842,7 +839,6 @@
               </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
