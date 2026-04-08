@@ -396,20 +396,25 @@
           </div>
           <div class="chat-header-sub">IT Support — typically responds in under 1 minute</div>
         </div>
-        <div style="margin-left:auto;display:flex;gap:8px;">
-          <div style="padding:6px 12px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg-glass);font-size:12px;font-weight:500;color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;gap:6px;">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;"><path d="M8 3v10M3 8h10" stroke-linecap="round"/></svg>
-            New conversation
-          </div>
-        </div>
       </div>
 
-      <!-- Conversation history (nested in chat) -->
-      <div class="conv-history" style="padding:0 24px;border-bottom:1px solid var(--border);">
-        <div style="display:flex;gap:8px;padding:8px 0;overflow-x:auto;">
-          <div style="padding:5px 12px;border-radius:999px;font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent);border:1px solid rgba(204,76,26,0.2);white-space:nowrap;cursor:pointer;">VPN not connecting</div>
-          <div style="padding:5px 12px;border-radius:999px;font-size:12px;font-weight:500;background:var(--bg-glass);color:var(--text-muted);border:1px solid var(--border);white-space:nowrap;cursor:pointer;">Slack integration issue</div>
-          <div style="padding:5px 12px;border-radius:999px;font-size:12px;font-weight:500;background:var(--bg-glass);color:var(--text-muted);border:1px solid var(--border);white-space:nowrap;cursor:pointer;">Adobe license request</div>
+      <!-- Conversation tabs (Chrome-style) -->
+      <div class="conv-tabs" style="display:flex;align-items:stretch;background:var(--bg);border-bottom:1px solid var(--border);padding:0;height:36px;">
+        <div style="display:flex;align-items:center;gap:8px;padding:0 14px;background:var(--bg-raised);border-right:1px solid var(--border);border-bottom:1px solid var(--bg-raised);margin-bottom:-1px;font-size:12px;font-weight:600;color:var(--text-primary);cursor:pointer;white-space:nowrap;border-top-left-radius:8px;border-top-right-radius:8px;position:relative;">
+          <svg style="width:10px;height:10px;color:var(--accent);flex-shrink:0;" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="5"/></svg>
+          VPN not connecting
+          <svg style="width:10px;height:10px;color:var(--text-muted);cursor:pointer;flex-shrink:0;" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round"/></svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:0 14px;font-size:12px;font-weight:500;color:var(--text-muted);cursor:pointer;white-space:nowrap;border-right:1px solid var(--border);transition:color 0.12s;">
+          Slack integration issue
+          <svg style="width:10px;height:10px;color:var(--text-muted);cursor:pointer;opacity:0.5;flex-shrink:0;" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round"/></svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:0 14px;font-size:12px;font-weight:500;color:var(--text-muted);cursor:pointer;white-space:nowrap;border-right:1px solid var(--border);transition:color 0.12s;">
+          Adobe license request
+          <svg style="width:10px;height:10px;color:var(--text-muted);cursor:pointer;opacity:0.5;flex-shrink:0;" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round"/></svg>
+        </div>
+        <div style="display:flex;align-items:center;padding:0 10px;color:var(--text-muted);cursor:pointer;" title="New conversation">
+          <svg style="width:14px;height:14px;" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10" stroke-linecap="round"/></svg>
         </div>
       </div>
 
