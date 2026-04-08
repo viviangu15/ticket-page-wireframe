@@ -312,30 +312,19 @@
     }
 
     /* Catch-up card */
-    .catchup-card {
-      background: rgba(167,139,250,0.06);
-      border: 1px solid rgba(167,139,250,0.12);
-      border-radius: var(--radius-lg);
-      padding: 18px 20px; margin-bottom: 24px;
-    }
-    .catchup-header {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
-    }
-    .catchup-icon {
-      width: 24px; height: 24px; border-radius: 6px;
-      background: rgba(167,139,250,0.12);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .catchup-icon svg { width: 14px; height: 14px; color: var(--color-violet); }
-    .catchup-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--color-violet);
-    }
+    /* Catch-up — borderless, lightweight */
+    .catchup-area { margin-bottom: 24px; }
     .catchup-body {
       font-size: 13px; color: var(--text-secondary); line-height: 1.7;
     }
-    .catchup-body strong { color: var(--text-primary); }
+    .catchup-body a {
+      color: var(--text-primary); font-weight: 600;
+      text-decoration: none; border-bottom: 1px dashed var(--text-muted);
+      transition: border-color 0.15s;
+    }
+    .catchup-body a:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Quick action buttons + chat prompts */
     .catchup-actions {
       display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;
     }
@@ -351,6 +340,18 @@
       color: #fff;
     }
     .catchup-action.primary:hover { background: #b54215; }
+
+    .catchup-prompts {
+      display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;
+    }
+    .catchup-prompt {
+      padding: 5px 12px; border-radius: 999px;
+      font-size: 12px; font-weight: 500; cursor: pointer;
+      border: 1px solid var(--border); background: none;
+      color: var(--text-muted); transition: all 0.12s;
+      font-style: italic;
+    }
+    .catchup-prompt:hover { color: var(--text-secondary); border-color: var(--border-strong); }
 
     /* Composer (at top of timeline) */
     .composer {
@@ -868,18 +869,19 @@
       <div class="main-timeline">
 
         <!-- Catch-up card -->
-        <div class="catchup-card">
-          <div class="catchup-header">
-            <div class="catchup-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg></div>
-            <span class="catchup-label">Catch up</span>
-          </div>
+        <div class="catchup-area">
           <div class="catchup-body">
-            <strong>Sarah from Data Engineering</strong> reported a VPN connection failure after a macOS update. The self-service agent identified a pending GlobalProtect v6.2.1 update, but the manual install failed. <strong>Ben pushed the update via Jamf</strong> and the workflow is currently polling the device. The ticket's been active for 38 minutes — SLA deadline is 11:00 AM. <strong>Next step is verifying whether the push succeeded and VPN connectivity is restored.</strong>
+            <a href="#">Sarah</a> reported a VPN failure after a macOS update. Self-service remediation failed — <a href="#">Ben</a> pushed the GlobalProtect update via Jamf and the workflow is currently polling the device. Next step is verifying whether the push succeeded.
           </div>
           <div class="catchup-actions">
             <div class="catchup-action primary">Check workflow status</div>
             <div class="catchup-action">Message Sarah</div>
             <div class="catchup-action">View device in Axiom</div>
+          </div>
+          <div class="catchup-prompts">
+            <div class="catchup-prompt">Are there other users with similar issues?</div>
+            <div class="catchup-prompt">What changed recently on this device?</div>
+            <div class="catchup-prompt">Summarize the self-service conversation</div>
           </div>
         </div>
 
