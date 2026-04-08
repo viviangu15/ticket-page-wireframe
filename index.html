@@ -166,11 +166,14 @@
     /* Synced from external — subtle inline link */
     .external-link {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: 12px; color: var(--text-muted);
-      text-decoration: none; transition: color 0.15s;
+      font-size: 11px; color: var(--text-muted);
+      text-decoration: none; transition: all 0.15s;
       font-family: 'IBM Plex Mono', monospace;
+      padding: 3px 10px; border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      font-weight: 600; letter-spacing: 0.06em;
     }
-    .external-link:hover { color: var(--text-secondary); }
+    .external-link:hover { color: var(--text-secondary); border-color: rgba(255,255,255,0.2); }
     .external-link .ext-icon {
       width: 18px; height: 18px; border-radius: 3px;
       display: flex; align-items: center; justify-content: center;
