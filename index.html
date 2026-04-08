@@ -1068,11 +1068,80 @@
 
       </div>
 
-      <!-- ══ RIGHT SIDEBAR ══ -->
+      <!-- ══ RIGHT SIDEBAR — progressive disclosure: actionable → context → investigation ══ -->
       <div class="right-sidebar">
 
-        <!-- Overview / Details — most relevant first -->
+        <!-- 1. Workflow — active, needs attention NOW -->
         <div class="sb-section">
+          <div class="sb-section-header">
+            <div class="sb-section-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="sb-section-label">Workflow</span>
+            <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div class="sb-section-body">
+            <div class="sb-workflow-card">
+              <div class="sb-workflow-dot"></div>
+              <div class="sb-workflow-info">
+                <div class="sb-workflow-name">Push GP v6.2.1 via Jamf</div>
+                <div class="sb-workflow-detail">ACME-MC-4471 · Running 1 min</div>
+              </div>
+            </div>
+            <div class="sb-workflow-steps">
+              <div class="sb-wf-step"><div class="sb-wf-bar done"></div><div class="sb-wf-label done">Send</div></div>
+              <div class="sb-wf-step"><div class="sb-wf-bar active"></div><div class="sb-wf-label active">Poll</div></div>
+              <div class="sb-wf-step"><div class="sb-wf-bar pending"></div><div class="sb-wf-label">Verify</div></div>
+              <div class="sb-wf-step"><div class="sb-wf-bar pending"></div><div class="sb-wf-label">Confirm</div></div>
+            </div>
+            <div style="margin-top:12px;">
+              <button class="btn btn-primary btn-sm" style="width:100%;">Run Workflow</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. AI Reasoning — what to do next -->
+        <div class="sb-section">
+          <div class="sb-section-header">
+            <div class="sb-section-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg></div>
+            <span class="sb-section-label">AI Reasoning</span>
+            <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div class="sb-section-body">
+            <div class="sb-ai-card">
+              <p>Device received macOS 15.3 update but GP client update <strong>(v6.2.1)</strong> still pending. Self-service failed due to permissions. <strong>Jamf admin push recommended.</strong> 14 other devices in same state.</p>
+            </div>
+            <div class="sb-ai-suggestion">
+              <span class="sb-ai-suggestion-title">Push GP v6.2.1 via Jamf</span>
+              <span class="sb-ai-confidence">92%</span>
+            </div>
+            <div class="sb-ai-suggestion">
+              <span class="sb-ai-suggestion-title">Bulk push to 14 devices</span>
+              <span class="sb-ai-confidence">88%</span>
+            </div>
+
+            <div class="sub-heading" style="margin-top:14px;">Similar Tickets</div>
+            <div class="sb-similar-ticket">
+              <span class="sb-similar-id">TKT-4480</span>
+              <span class="sb-similar-title">VPN failure — GP update pending</span>
+              <span class="badge badge-status open" style="font-size:9px;padding:2px 6px;">Open</span>
+            </div>
+            <div class="sb-similar-ticket">
+              <span class="sb-similar-id">TKT-4483</span>
+              <span class="sb-similar-title">GlobalProtect won't connect</span>
+              <span class="badge badge-status open" style="font-size:9px;padding:2px 6px;">Open</span>
+            </div>
+            <div class="sb-similar-ticket">
+              <span class="sb-similar-id">TKT-4479</span>
+              <span class="sb-similar-title">VPN spinning after macOS 15.3</span>
+              <span class="badge badge-status resolved" style="font-size:9px;padding:2px 6px;">Resolved</span>
+            </div>
+            <div style="padding:6px 0 0;font-size:11px;">
+              <a href="#" style="color:var(--accent);text-decoration:none;font-weight:500;">View all 14 &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Overview — reference context, collapsed by default (header already shows key fields) -->
+        <div class="sb-section collapsed">
           <div class="sb-section-header">
             <div class="sb-section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <span class="sb-section-label">Overview</span>
@@ -1131,75 +1200,6 @@
               <span class="tag">globalprotect</span>
               <span class="tag">macos-update</span>
               <span class="tag">jamf</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Workflow Execution -->
-        <div class="sb-section">
-          <div class="sb-section-header">
-            <div class="sb-section-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <span class="sb-section-label">Workflow</span>
-            <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-          <div class="sb-section-body">
-            <div class="sb-workflow-card">
-              <div class="sb-workflow-dot"></div>
-              <div class="sb-workflow-info">
-                <div class="sb-workflow-name">Push GP v6.2.1 via Jamf</div>
-                <div class="sb-workflow-detail">ACME-MC-4471 · Running 1 min</div>
-              </div>
-            </div>
-            <div class="sb-workflow-steps">
-              <div class="sb-wf-step"><div class="sb-wf-bar done"></div><div class="sb-wf-label done">Send</div></div>
-              <div class="sb-wf-step"><div class="sb-wf-bar active"></div><div class="sb-wf-label active">Poll</div></div>
-              <div class="sb-wf-step"><div class="sb-wf-bar pending"></div><div class="sb-wf-label">Verify</div></div>
-              <div class="sb-wf-step"><div class="sb-wf-bar pending"></div><div class="sb-wf-label">Confirm</div></div>
-            </div>
-            <div style="margin-top:12px;">
-              <button class="btn btn-primary btn-sm" style="width:100%;">Run Workflow</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- AI Reasoning -->
-        <div class="sb-section">
-          <div class="sb-section-header">
-            <div class="sb-section-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg></div>
-            <span class="sb-section-label">AI Reasoning</span>
-            <span class="sb-section-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-          <div class="sb-section-body">
-            <div class="sb-ai-card">
-              <p>Device received macOS 15.3 update but GP client update <strong>(v6.2.1)</strong> still pending. Self-service failed due to permissions. <strong>Jamf admin push recommended.</strong> 14 other devices in same state.</p>
-            </div>
-            <div class="sb-ai-suggestion">
-              <span class="sb-ai-suggestion-title">Push GP v6.2.1 via Jamf</span>
-              <span class="sb-ai-confidence">92%</span>
-            </div>
-            <div class="sb-ai-suggestion">
-              <span class="sb-ai-suggestion-title">Bulk push to 14 devices</span>
-              <span class="sb-ai-confidence">88%</span>
-            </div>
-
-            <div class="sub-heading" style="margin-top:14px;">Similar Tickets</div>
-            <div class="sb-similar-ticket">
-              <span class="sb-similar-id">TKT-4480</span>
-              <span class="sb-similar-title">VPN failure — GP update pending</span>
-              <span class="badge badge-status open" style="font-size:9px;padding:2px 6px;">Open</span>
-            </div>
-            <div class="sb-similar-ticket">
-              <span class="sb-similar-id">TKT-4483</span>
-              <span class="sb-similar-title">GlobalProtect won't connect</span>
-              <span class="badge badge-status open" style="font-size:9px;padding:2px 6px;">Open</span>
-            </div>
-            <div class="sb-similar-ticket">
-              <span class="sb-similar-id">TKT-4479</span>
-              <span class="sb-similar-title">VPN spinning after macOS 15.3</span>
-              <span class="badge badge-status resolved" style="font-size:9px;padding:2px 6px;">Resolved</span>
-            </div>
-            <div style="padding:6px 0 0;font-size:11px;">
-              <a href="#" style="color:var(--accent);text-decoration:none;font-weight:500;">View all 14 &rarr;</a>
             </div>
           </div>
         </div>
