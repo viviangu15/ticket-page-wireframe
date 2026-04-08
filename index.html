@@ -1291,7 +1291,7 @@
     });
   });
 
-  // Close all dropdowns when clicking outside
+  // Close all dropdowns and collapse empty composer when clicking outside
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.status-dropdown-wrapper')) {
       statusMenu.classList.remove('open');
@@ -1301,6 +1301,14 @@
     }
     if (!e.target.closest('.visibility-wrapper')) {
       visMenu.classList.remove('open');
+    }
+    // Collapse composer if clicked outside and textarea is empty
+    const composer = document.getElementById('composerInline');
+    if (composer.classList.contains('open') && !e.target.closest('.composer-inline')) {
+      const textarea = composer.querySelector('.composer-textarea');
+      if (!textarea.value.trim()) {
+        composer.classList.remove('open');
+      }
     }
   });
 </script>
