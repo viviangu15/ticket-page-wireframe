@@ -99,7 +99,9 @@
     }
     .ask-bar-icon { color: var(--color-gold); flex-shrink: 0; }
     .ask-bar-icon svg { width: 16px; height: 16px; }
-    .ask-bar-text { flex: 1; font-size: 13px; color: var(--text-muted); }
+    .ask-bar-text { flex: 1; font-size: 13px; color: var(--text-muted); width: 100%; }
+    .ask-bar.highlight { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); transition: all 0.3s; }
+    .ask-bar-text::placeholder { color: var(--text-muted); }
     .ask-bar-actions { display: flex; gap: 6px; align-items: center; }
     .ask-bar-actions svg { width: 14px; height: 14px; color: var(--text-muted); cursor: pointer; }
     .left-nav-footer { padding: 12px 12px 16px; border-top: 1px solid var(--border); }
@@ -783,7 +785,7 @@
     <div class="ask-bar-container">
       <div class="ask-bar">
         <div class="ask-bar-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.5 3.5L13 6l-3.5 1.5L8 11 6.5 7.5 3 6l3.5-1.5L8 1zM3 11l.75 1.75L5.5 13.5l-1.75.75L3 16l-.75-1.75L.5 13.5l1.75-.75L3 11z"/></svg></div>
-        <span class="ask-bar-text">Ask anything...</span>
+        <input class="ask-bar-text" id="askBarInput" placeholder="Ask anything..." style="background:none;border:none;outline:none;font-family:'DM Sans',sans-serif;">
         <div class="ask-bar-actions">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10" stroke-linecap="round"/></svg>
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13l10-10M13 3v4M13 3H9" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1296,6 +1298,35 @@
       // Update the button icon to match
       visBtn.querySelector('svg:first-child').outerHTML = option.querySelector('.vis-option-icon').outerHTML.replace('vis-option-icon', '');
       visMenu.classList.remove('open');
+    });
+  });
+
+  // Chat prompts type into the Ask bar
+  document.querySelectorAll('.catchup-prompt').forEach(prompt => {
+    prompt.addEventListener('click', () => {
+      const askBar = document.querySelector('.ask-bar');
+      const input = document.getElementById('askBarInput');
+      const text = prompt.textContent;
+
+      // Scroll ask bar into view
+      askBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      // Highlight the ask bar
+      askBar.classList.add('highlight');
+      setTimeout(() => askBar.classList.remove('highlight'), 2000);
+
+      // Type the prompt into the input
+      input.value = '';
+      input.focus();
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < text.length) {
+          input.value += text[i];
+          i++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 25);
     });
   });
 
