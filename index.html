@@ -195,25 +195,24 @@
 
     /* Header dropdown fields */
     .header-fields {
-      display: grid;
-      grid-template-columns: 3fr 1fr;
-      gap: 16px;
+      display: flex;
+      gap: 12px;
       margin-top: 14px;
     }
     .header-fields-group {
-      display: flex; gap: 16px;
+      display: flex; gap: 12px;
     }
-    .header-field { flex: 1; min-width: 0; }
+    .header-field { min-width: 0; }
     .header-field-label {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 10px; font-weight: 600; text-transform: uppercase;
       letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 6px;
     }
     .header-dropdown {
-      display: flex; align-items: center; gap: 10px;
+      display: inline-flex; align-items: center; gap: 8px;
       background: var(--bg-card); border: 1px solid var(--border-strong);
-      border-radius: var(--radius); padding: 8px 12px;
-      cursor: pointer; transition: border-color 0.15s; min-height: 40px;
+      border-radius: var(--radius); padding: 7px 12px;
+      cursor: pointer; transition: border-color 0.15s; white-space: nowrap;
     }
     .header-dropdown:hover { border-color: rgba(255,255,255,0.2); }
     /* Status dropdown colors */
