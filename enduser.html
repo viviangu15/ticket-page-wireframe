@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111114">
+  <title>STLabs — End-User View</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Hanken+Grotesk:wght@200;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #cc4c1a;
+      --accent-soft: rgba(204, 76, 26, 0.12);
+      --bg: #111114;
+      --bg-raised: #18181c;
+      --bg-card: #1c1c21;
+      --bg-glass: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.12);
+      --text-primary: rgba(255, 255, 255, 0.92);
+      --text-secondary: rgba(255, 255, 255, 0.55);
+      --text-muted: rgba(255, 255, 255, 0.35);
+      --color-blue: #5b9bf5;
+      --color-teal: #2dd4a8;
+      --color-violet: #a78bfa;
+      --color-gold: #f5c542;
+      --color-red: #f87171;
+      --color-green: #34d399;
+      --color-orange: #fb923c;
+      --radius: 8px;
+      --radius-lg: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: 14px;
+      line-height: 1.5;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ══ LEFT NAV (minimal end-user version) ══ */
+    .left-nav {
+      width: 210px;
+      background: var(--bg-raised);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      flex-shrink: 0; height: 100vh;
+    }
+    .left-nav-header {
+      padding: 16px 16px 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .left-nav-logo-icon {
+      width: 28px; height: 28px; background: var(--accent);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    }
+    .left-nav-logo-icon svg { width: 16px; height: 16px; }
+    .left-nav-logo-text {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 700; font-size: 17px; color: var(--text-primary); letter-spacing: -0.3px;
+    }
+
+    .nav-section-label {
+      padding: 8px 16px 6px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-muted);
+    }
+
+    .left-nav-items { flex: 1; padding: 0 8px; display: flex; flex-direction: column; gap: 2px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;
+      color: var(--text-secondary); cursor: pointer; text-decoration: none; transition: all 0.12s;
+    }
+    .nav-item:hover { color: var(--text-primary); background: var(--bg-glass); }
+    .nav-item.active { color: var(--text-primary); background: rgba(255,255,255,0.07); }
+    .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .nav-item-badge {
+      margin-left: auto; font-size: 10px; font-weight: 600;
+      background: var(--accent-soft); color: var(--accent);
+      padding: 1px 6px; border-radius: 999px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .nav-item-time {
+      margin-left: auto; font-size: 10px; color: var(--text-muted);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .nav-divider { height: 1px; background: var(--border); margin: 8px 16px; }
+
+    .left-nav-footer { padding: 12px 12px 16px; border-top: 1px solid var(--border); }
+    .nav-user {
+      display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 6px; cursor: pointer;
+    }
+    .nav-user-avatar {
+      width: 30px; height: 30px; border-radius: 50%; background: var(--color-blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; color: #fff; flex-shrink: 0;
+    }
+    .nav-user-name { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+
+    /* ══ MAIN CONTENT ══ */
+    .main-content {
+      flex: 1; display: flex; overflow: hidden;
+    }
+
+    /* ══ CHAT (left side) ══ */
+    .chat-panel {
+      flex: 1; display: flex; flex-direction: column; min-width: 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .chat-header {
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .chat-header-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: rgba(167,139,250,0.12);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .chat-header-icon svg { width: 18px; height: 18px; color: var(--color-violet); }
+    .chat-header-info { flex: 1; }
+    .chat-header-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .chat-header-sub { font-size: 12px; color: var(--text-muted); }
+
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 24px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    /* Message bubbles */
+    .msg { display: flex; gap: 10px; max-width: 85%; }
+    .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+    .msg-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600; color: #fff; flex-shrink: 0; margin-top: 2px;
+    }
+    .msg-avatar.agent { background: rgba(167,139,250,0.2); color: var(--color-violet); }
+    .msg-avatar.user { background: var(--color-blue); }
+
+    .msg-content {}
+    .msg-bubble {
+      padding: 10px 14px; border-radius: 12px;
+      font-size: 13px; line-height: 1.6;
+    }
+    .msg.agent .msg-bubble {
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-secondary); border-top-left-radius: 4px;
+    }
+    .msg.user .msg-bubble {
+      background: var(--accent); color: #fff;
+      border-top-right-radius: 4px;
+    }
+    .msg-bubble strong { color: var(--text-primary); }
+    .msg.user .msg-bubble strong { color: #fff; }
+    .msg-time {
+      font-size: 10px; color: var(--text-muted); margin-top: 4px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .msg.user .msg-time { text-align: right; }
+
+    /* Agent options in chat */
+    .msg-options {
+      display: flex; flex-direction: column; gap: 6px; margin-top: 8px;
+    }
+    .msg-option {
+      padding: 8px 14px; border-radius: var(--radius);
+      border: 1px solid var(--border); background: var(--bg-glass);
+      font-size: 13px; font-weight: 500; color: var(--text-primary);
+      cursor: pointer; transition: all 0.12s;
+    }
+    .msg-option:hover { background: var(--bg-card); border-color: var(--accent); }
+    .msg-option.selected {
+      background: var(--accent-soft); border-color: var(--accent); color: var(--accent);
+    }
+
+    /* System messages */
+    .msg-system {
+      text-align: center; font-size: 12px; color: var(--text-muted);
+      padding: 8px 0;
+    }
+    .msg-system span {
+      background: var(--bg-glass); border: 1px solid var(--border);
+      padding: 4px 12px; border-radius: 999px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    }
+
+    /* Chat input */
+    .chat-input-area {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+    }
+    .chat-input-wrapper {
+      display: flex; align-items: flex-end; gap: 10px;
+      background: var(--bg-card); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg); padding: 10px 14px;
+      transition: border-color 0.15s;
+    }
+    .chat-input-wrapper:focus-within {
+      border-color: var(--accent);
+    }
+    .chat-input {
+      flex: 1; background: none; border: none; outline: none;
+      font-size: 14px; font-family: 'DM Sans', sans-serif;
+      color: var(--text-primary); resize: none;
+      min-height: 20px; max-height: 120px;
+    }
+    .chat-input::placeholder { color: var(--text-muted); }
+    .chat-send-btn {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--accent); border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.15s; flex-shrink: 0;
+    }
+    .chat-send-btn:hover { background: #b54215; }
+    .chat-send-btn svg { width: 16px; height: 16px; color: #fff; }
+
+    /* ══ TICKET PREVIEW (right side) ══ */
+    .ticket-panel {
+      width: 400px; flex-shrink: 0;
+      background: var(--bg-raised);
+      overflow-y: auto;
+      display: flex; flex-direction: column;
+    }
+
+    .ticket-panel-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ticket-panel-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--text-muted);
+    }
+    .ticket-panel-link {
+      font-size: 12px; color: var(--accent); text-decoration: none; font-weight: 500;
+    }
+
+    .ticket-preview { padding: 20px; flex: 1; }
+
+    .tp-status-row {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+    }
+    .tp-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 10px; border-radius: 999px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.06em; border: 1px solid;
+    }
+    .tp-badge.status {
+      background: transparent; border-color: var(--color-blue); color: var(--color-blue);
+    }
+    .tp-badge.priority {
+      background: rgba(251,146,60,0.12); border-color: rgba(251,146,60,0.2); color: var(--color-orange);
+    }
+    .tp-badge.sla {
+      background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.2); color: var(--color-green);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .tp-ticket-id {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px; color: var(--text-muted); margin-bottom: 6px;
+    }
+    .tp-ticket-title {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 16px; font-weight: 700; color: var(--text-primary);
+      line-height: 1.3; margin-bottom: 8px;
+    }
+    .tp-ticket-desc {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .tp-divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+    .tp-detail-row {
+      display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px;
+    }
+    .tp-detail-label { color: var(--text-muted); }
+    .tp-detail-value { color: var(--text-primary); font-weight: 500; }
+
+    /* Quick actions */
+    .tp-actions-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-muted);
+      margin-bottom: 10px; margin-top: 20px;
+    }
+    .tp-action {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: var(--radius);
+      border: 1px solid var(--border); background: var(--bg-card);
+      font-size: 13px; font-weight: 500; color: var(--text-primary);
+      cursor: pointer; transition: all 0.12s; margin-bottom: 6px;
+    }
+    .tp-action:hover {
+      border-color: var(--accent); background: var(--accent-soft);
+    }
+    .tp-action-icon {
+      width: 20px; height: 20px; border-radius: 5px;
+      background: var(--bg-glass);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .tp-action-icon svg { width: 12px; height: 12px; color: var(--text-secondary); }
+    .tp-action:hover .tp-action-icon svg { color: var(--accent); }
+    .tp-action-text { flex: 1; }
+    .tp-action-arrow { color: var(--text-muted); font-size: 12px; }
+
+    /* Timeline summary in ticket preview */
+    .tp-timeline-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-muted);
+      margin-bottom: 10px; margin-top: 20px;
+    }
+    .tp-timeline-item {
+      display: flex; gap: 8px; font-size: 12px; color: var(--text-muted);
+      padding: 6px 0; border-bottom: 1px solid var(--border);
+    }
+    .tp-timeline-item:last-child { border-bottom: none; }
+    .tp-timeline-time {
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+      color: var(--text-muted); flex-shrink: 0; width: 60px;
+    }
+    .tp-timeline-text { color: var(--text-secondary); }
+
+    @media (max-width: 900px) {
+      .ticket-panel { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ LEFT NAV ══ -->
+  <nav class="left-nav">
+    <div class="left-nav-header">
+      <div class="left-nav-logo-icon"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.5"><rect x="3" y="3" width="10" height="10" rx="2"/><path d="M6 8h4M8 6v4"/></svg></div>
+      <span class="left-nav-logo-text">stlabs</span>
+    </div>
+
+    <div class="nav-section-label">Conversations</div>
+    <div class="left-nav-items">
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 24 24"><path d="M12 3v10M3 8h10" stroke-linecap="round"/></svg>
+        New conversation
+      </a>
+
+      <div class="nav-divider"></div>
+
+      <a class="nav-item active" href="#">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        VPN not connecting
+        <span class="nav-item-badge">Active</span>
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Slack integration issue
+        <span class="nav-item-time">3 mo</span>
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Adobe license request
+        <span class="nav-item-time">6 mo</span>
+      </a>
+    </div>
+
+    <div class="left-nav-footer">
+      <div class="nav-user">
+        <div class="nav-user-avatar">SC</div>
+        <span class="nav-user-name">Sarah Chen</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══ MAIN CONTENT ══ -->
+  <div class="main-content">
+
+    <!-- ══ CHAT PANEL (left) ══ -->
+    <div class="chat-panel">
+
+      <div class="chat-header">
+        <div class="chat-header-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg>
+        </div>
+        <div class="chat-header-info">
+          <div class="chat-header-title">IT Support</div>
+          <div class="chat-header-sub">Typically responds in under 1 minute</div>
+        </div>
+      </div>
+
+      <div class="chat-messages">
+
+        <!-- User message -->
+        <div class="msg user">
+          <div class="msg-avatar user">SC</div>
+          <div class="msg-content">
+            <div class="msg-bubble">I can't connect to VPN. Updated macOS last night and now GlobalProtect just spins. I have a critical data pipeline deploy at 11 AM.</div>
+            <div class="msg-time">9:47 AM</div>
+          </div>
+        </div>
+
+        <!-- System: ticket created -->
+        <div class="msg-system">
+          <span>Ticket TKT-4471 created</span>
+        </div>
+
+        <!-- Agent response -->
+        <div class="msg agent">
+          <div class="msg-avatar agent">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg>
+          </div>
+          <div class="msg-content">
+            <div class="msg-bubble">
+              This looks like a known issue. Your MacBook received the <strong>macOS 15.3 update</strong> last night, but a required <strong>GlobalProtect update (v6.2.1)</strong> hasn't installed yet. Two options:
+            </div>
+            <div class="msg-options">
+              <div class="msg-option selected">1. Walk me through installing the update now (~3 min)</div>
+              <div class="msg-option">2. Have IT push it remotely (~30 min)</div>
+            </div>
+            <div class="msg-time">9:48 AM</div>
+          </div>
+        </div>
+
+        <!-- User picks option -->
+        <div class="msg user">
+          <div class="msg-avatar user">SC</div>
+          <div class="msg-content">
+            <div class="msg-bubble">Let's do option 1, I need this fixed before my deploy.</div>
+            <div class="msg-time">9:48 AM</div>
+          </div>
+        </div>
+
+        <!-- Agent guides -->
+        <div class="msg agent">
+          <div class="msg-avatar agent">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg>
+          </div>
+          <div class="msg-content">
+            <div class="msg-bubble">
+              Great. Here's what to do:<br><br>
+              1. Open <strong>Self Service</strong> from your Applications folder<br>
+              2. Search for <strong>"GlobalProtect"</strong><br>
+              3. Click <strong>Install</strong> on the v6.2.1 update<br><br>
+              Let me know once it's done or if you hit any issues.
+            </div>
+            <div class="msg-time">9:49 AM</div>
+          </div>
+        </div>
+
+        <!-- User reports failure -->
+        <div class="msg user">
+          <div class="msg-avatar user">SC</div>
+          <div class="msg-content">
+            <div class="msg-bubble">It says "installation failed — contact your administrator."</div>
+            <div class="msg-time">9:52 AM</div>
+          </div>
+        </div>
+
+        <!-- Agent asks follow-up -->
+        <div class="msg agent">
+          <div class="msg-avatar agent">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg>
+          </div>
+          <div class="msg-content">
+            <div class="msg-bubble">Can you check your available storage? Go to <strong>Apple menu → About This Mac → Storage</strong>.</div>
+            <div class="msg-time">9:53 AM</div>
+          </div>
+        </div>
+
+        <div class="msg user">
+          <div class="msg-avatar user">SC</div>
+          <div class="msg-content">
+            <div class="msg-bubble">I have 12 GB free.</div>
+            <div class="msg-time">9:54 AM</div>
+          </div>
+        </div>
+
+        <!-- Agent escalates -->
+        <div class="msg agent">
+          <div class="msg-avatar agent">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg>
+          </div>
+          <div class="msg-content">
+            <div class="msg-bubble">
+              That should be plenty of space. This failure needs someone with admin access to your device. I'm <strong>escalating now</strong> with everything we've tried so your IT team doesn't repeat steps. Given your deploy at 11 AM, I've marked this as time-sensitive.
+            </div>
+            <div class="msg-time">9:55 AM</div>
+          </div>
+        </div>
+
+        <!-- System: escalated -->
+        <div class="msg-system">
+          <span>Ticket escalated to IT Support</span>
+        </div>
+
+        <!-- Resolution notification -->
+        <div class="msg agent">
+          <div class="msg-avatar agent">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg>
+          </div>
+          <div class="msg-content">
+            <div class="msg-bubble">
+              <strong>Your VPN issue is being worked on.</strong> Ben Torres from IT has pushed the GlobalProtect update to your device remotely. The update is installing now — you should be able to connect to VPN in a few minutes. I'll let you know once it's confirmed.
+            </div>
+            <div class="msg-time">10:26 AM</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Chat input -->
+      <div class="chat-input-area">
+        <div class="chat-input-wrapper">
+          <textarea class="chat-input" rows="1" placeholder="Type a message..."></textarea>
+          <button class="chat-send-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══ TICKET PREVIEW (right) ══ -->
+    <div class="ticket-panel">
+
+      <div class="ticket-panel-header">
+        <span class="ticket-panel-title">Ticket Preview</span>
+        <a href="#" class="ticket-panel-link">View full ticket &rarr;</a>
+      </div>
+
+      <div class="ticket-preview">
+
+        <div class="tp-status-row">
+          <span class="tp-badge status">In Progress</span>
+          <span class="tp-badge priority">P2</span>
+          <span class="tp-badge sla">SLA: 33 min</span>
+        </div>
+
+        <div class="tp-ticket-id">TKT-4471</div>
+        <div class="tp-ticket-title">VPN Connection Failure — Pending GlobalProtect Update</div>
+        <div class="tp-ticket-desc">"I can't connect to VPN. Updated macOS last night and now GlobalProtect just spins. I have a critical data pipeline deploy at 11 AM."</div>
+
+        <div class="tp-detail-row">
+          <span class="tp-detail-label">Owner</span>
+          <span class="tp-detail-value">Ben Torres (L2)</span>
+        </div>
+        <div class="tp-detail-row">
+          <span class="tp-detail-label">Category</span>
+          <span class="tp-detail-value">VPN / Network Access</span>
+        </div>
+        <div class="tp-detail-row">
+          <span class="tp-detail-label">Queue</span>
+          <span class="tp-detail-value">Engineering</span>
+        </div>
+        <div class="tp-detail-row">
+          <span class="tp-detail-label">Created</span>
+          <span class="tp-detail-value" style="font-family:'IBM Plex Mono',monospace;font-size:12px;">Apr 1, 9:47 AM</span>
+        </div>
+
+        <div class="tp-divider"></div>
+
+        <!-- Quick actions -->
+        <div class="tp-actions-label">Quick Actions</div>
+
+        <div class="tp-action" onclick="typeInChat('Is there an update on my VPN issue?')">
+          <div class="tp-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span class="tp-action-text">Ask for an update</span>
+          <span class="tp-action-arrow">&rarr;</span>
+        </div>
+
+        <div class="tp-action" onclick="typeInChat('I need to provide more information about my VPN issue.')">
+          <div class="tp-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span class="tp-action-text">Add more information</span>
+          <span class="tp-action-arrow">&rarr;</span>
+        </div>
+
+        <div class="tp-action" onclick="typeInChat('This issue is now urgent — I need it resolved immediately.')">
+          <div class="tp-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span class="tp-action-text">Mark as urgent</span>
+          <span class="tp-action-arrow">&rarr;</span>
+        </div>
+
+        <div class="tp-action" onclick="typeInChat('My VPN issue has been resolved, you can close the ticket.')">
+          <div class="tp-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke-linecap="round"/><path d="M22 4L12 14.01l-3-3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span class="tp-action-text">Mark as resolved</span>
+          <span class="tp-action-arrow">&rarr;</span>
+        </div>
+
+        <div class="tp-divider"></div>
+
+        <!-- Recent activity summary -->
+        <div class="tp-timeline-label">Recent Activity</div>
+        <div class="tp-timeline-item">
+          <span class="tp-timeline-time">10:26 AM</span>
+          <span class="tp-timeline-text">Ben pushed GP update remotely</span>
+        </div>
+        <div class="tp-timeline-item">
+          <span class="tp-timeline-time">10:20 AM</span>
+          <span class="tp-timeline-text">Assigned to Ben Torres (L2)</span>
+        </div>
+        <div class="tp-timeline-item">
+          <span class="tp-timeline-time">9:55 AM</span>
+          <span class="tp-timeline-text">Escalated to IT Support</span>
+        </div>
+        <div class="tp-timeline-item">
+          <span class="tp-timeline-time">9:48 AM</span>
+          <span class="tp-timeline-text">Priority promoted to P2</span>
+        </div>
+        <div class="tp-timeline-item">
+          <span class="tp-timeline-time">9:47 AM</span>
+          <span class="tp-timeline-text">Ticket created</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<script>
+  // Quick actions type into chat
+  function typeInChat(text) {
+    const input = document.querySelector('.chat-input');
+    input.value = '';
+    input.focus();
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < text.length) {
+        input.value += text[i];
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 20);
+  }
+</script>
+
+</body>
+</html>
