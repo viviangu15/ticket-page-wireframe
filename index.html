@@ -324,22 +324,34 @@
     }
     .catchup-body a:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* Quick action buttons + chat prompts */
+    /* Suggested actions */
     .catchup-actions {
-      display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;
+      display: flex; flex-direction: column; gap: 8px; margin-top: 16px;
     }
     .catchup-action {
-      padding: 6px 14px; border-radius: var(--radius);
-      font-size: 12px; font-weight: 600; cursor: pointer;
-      border: 1px solid var(--border); background: var(--bg-glass);
-      color: var(--text-secondary); transition: all 0.12s;
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 14px; border-radius: var(--radius);
+      cursor: pointer; transition: all 0.12s;
     }
-    .catchup-action:hover { background: var(--bg-card); color: var(--text-primary); }
-    .catchup-action.primary {
-      background: var(--accent); border-color: var(--accent);
-      color: #fff;
+    .catchup-action:hover { background: var(--bg-glass); }
+    .catchup-action-num {
+      width: 22px; height: 22px; border-radius: 6px;
+      background: var(--bg-glass); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: var(--text-muted);
+      flex-shrink: 0; margin-top: 1px;
+      font-family: 'IBM Plex Mono', monospace;
     }
-    .catchup-action.primary:hover { background: #b54215; }
+    .catchup-action:hover .catchup-action-num {
+      border-color: var(--accent); color: var(--accent);
+    }
+    .catchup-action-content { flex: 1; }
+    .catchup-action-title {
+      font-size: 13px; font-weight: 600; color: var(--text-primary);
+    }
+    .catchup-action-reason {
+      font-size: 12px; color: var(--text-muted); margin-top: 2px; line-height: 1.5;
+    }
 
     .catchup-prompts {
       display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;
@@ -874,9 +886,27 @@
             <a href="#">Sarah</a> reported a VPN failure after a macOS update. Self-service remediation failed — <a href="#">Ben</a> pushed the GlobalProtect update via Jamf and the workflow is currently polling the device. Next step is verifying whether the push succeeded.
           </div>
           <div class="catchup-actions">
-            <div class="catchup-action primary">Check workflow status</div>
-            <div class="catchup-action">Message Sarah</div>
-            <div class="catchup-action">View device in Axiom</div>
+            <div class="catchup-action">
+              <div class="catchup-action-num">1</div>
+              <div class="catchup-action-content">
+                <div class="catchup-action-title">Check workflow status</div>
+                <div class="catchup-action-reason">Jamf push was sent 1 min ago — polling for device check-in</div>
+              </div>
+            </div>
+            <div class="catchup-action">
+              <div class="catchup-action-num">2</div>
+              <div class="catchup-action-content">
+                <div class="catchup-action-title">Message Sarah</div>
+                <div class="catchup-action-reason">Her deploy deadline is 11:00 AM — she may need a workaround if the push takes longer</div>
+              </div>
+            </div>
+            <div class="catchup-action">
+              <div class="catchup-action-num">3</div>
+              <div class="catchup-action-content">
+                <div class="catchup-action-title">View device in Axiom</div>
+                <div class="catchup-action-reason">MDM last check-in was 18 hours ago — may indicate a stale connection</div>
+              </div>
+            </div>
           </div>
           <div class="catchup-prompts">
             <div class="catchup-prompt">Are there other users with similar issues?</div>
