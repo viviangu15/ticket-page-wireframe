@@ -345,39 +345,32 @@
 </head>
 <body>
 
-  <!-- ══ LEFT NAV ══ -->
+  <!-- ══ LEFT NAV (same as IT staff page) ══ -->
   <nav class="left-nav">
-    <div class="left-nav-header">
-      <div class="left-nav-logo-icon"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.5"><rect x="3" y="3" width="10" height="10" rx="2"/><path d="M6 8h4M8 6v4"/></svg></div>
-      <span class="left-nav-logo-text">stlabs</span>
+    <div class="left-nav-header" style="display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="left-nav-logo-icon"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.5"><rect x="3" y="3" width="10" height="10" rx="2"/><path d="M6 8h4M8 6v4"/></svg></div>
+        <span class="left-nav-logo-text">stlabs</span>
+      </div>
+      <div style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);cursor:pointer;border-radius:4px;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M6 3v10"/></svg>
+      </div>
     </div>
-
-    <div class="nav-section-label">Conversations</div>
     <div class="left-nav-items">
-      <a class="nav-item" href="#">
-        <svg viewBox="0 0 24 24"><path d="M12 3v10M3 8h10" stroke-linecap="round"/></svg>
-        New conversation
-      </a>
-
-      <div class="nav-divider"></div>
-
-      <a class="nav-item active" href="#">
-        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        VPN not connecting
-        <span class="nav-item-badge">Active</span>
-      </a>
-      <a class="nav-item" href="#">
-        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Slack integration issue
-        <span class="nav-item-time">3 mo</span>
-      </a>
-      <a class="nav-item" href="#">
-        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Adobe license request
-        <span class="nav-item-time">6 mo</span>
-      </a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 24 24"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 8.89 4.18" stroke-linecap="round" stroke-linejoin="round"/></svg>Ask</a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" stroke-linecap="round" stroke-linejoin="round"/></svg>Inbox</a>
+      <a class="nav-item active" href="#"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" stroke-linecap="round" stroke-linejoin="round"/><rect x="9" y="3" width="6" height="4" rx="1" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12h6M9 16h6" stroke-linecap="round" stroke-linejoin="round"/></svg>Tickets</a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Workflows</a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke-linecap="round"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke-linecap="round"/></svg>Axiom</a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-linecap="round" stroke-linejoin="round"/><polyline points="22,6 12,13 2,6" stroke-linecap="round" stroke-linejoin="round"/></svg>Integrations</a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
     </div>
-
+    <div class="ask-bar-container" style="padding:8px 12px 12px;">
+      <div style="display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border-strong);border-radius:var(--radius);padding:8px 12px;cursor:text;">
+        <span style="color:var(--color-gold);flex-shrink:0;"><svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M8 1l1.5 3.5L13 6l-3.5 1.5L8 11 6.5 7.5 3 6l3.5-1.5L8 1zM3 11l.75 1.75L5.5 13.5l-1.75.75L3 16l-.75-1.75L.5 13.5l1.75-.75L3 11z"/></svg></span>
+        <span style="flex:1;font-size:13px;color:var(--text-muted);">Ask anything...</span>
+      </div>
+    </div>
     <div class="left-nav-footer">
       <div class="nav-user">
         <div class="nav-user-avatar">SC</div>
@@ -397,8 +390,26 @@
           <svg viewBox="88 134 324 228" fill="var(--accent)" width="18" height="18"><path d="M392.247,248.322c0-12.207,7.452-22.472,17.566-25.475v-61.415c0-14.023-11.368-25.391-25.391-25.391H115.577c-14.023,0-25.391,11.368-25.391,25.391v61.349c10.319,2.934,17.949,13.352,17.949,25.755s-7.63,22.821-17.949,25.755v61.321c0,14.023,11.368,25.391,25.391,25.391h268.846c14.023,0,25.391-11.368,25.391-25.391v-61.814c-10.114-3.003-17.566-13.268-17.566-25.475ZM364.642,315.823h-200.038l-29.245,13.893v-148.582h229.283v134.689Z"/><rect x="197.379" y="224.626" width="26.624" height="47.392" rx="12.207" ry="12.207" transform="translate(421.381 496.644) rotate(-180)"/><rect x="276.38" y="224.626" width="26.624" height="47.392" rx="12.207" ry="12.207" transform="translate(579.384 496.644) rotate(-180)"/></svg>
         </div>
         <div class="chat-header-info">
-          <div class="chat-header-title">IT Support</div>
-          <div class="chat-header-sub">Typically responds in under 1 minute</div>
+          <div class="chat-header-title" style="display:flex;align-items:center;gap:6px;">
+            VPN not connecting
+            <svg style="width:12px;height:12px;color:var(--text-muted);cursor:pointer;" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="chat-header-sub">IT Support — typically responds in under 1 minute</div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;">
+          <div style="padding:6px 12px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg-glass);font-size:12px;font-weight:500;color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;gap:6px;">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;"><path d="M8 3v10M3 8h10" stroke-linecap="round"/></svg>
+            New conversation
+          </div>
+        </div>
+      </div>
+
+      <!-- Conversation history (nested in chat) -->
+      <div class="conv-history" style="padding:0 24px;border-bottom:1px solid var(--border);">
+        <div style="display:flex;gap:8px;padding:8px 0;overflow-x:auto;">
+          <div style="padding:5px 12px;border-radius:999px;font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent);border:1px solid rgba(204,76,26,0.2);white-space:nowrap;cursor:pointer;">VPN not connecting</div>
+          <div style="padding:5px 12px;border-radius:999px;font-size:12px;font-weight:500;background:var(--bg-glass);color:var(--text-muted);border:1px solid var(--border);white-space:nowrap;cursor:pointer;">Slack integration issue</div>
+          <div style="padding:5px 12px;border-radius:999px;font-size:12px;font-weight:500;background:var(--bg-glass);color:var(--text-muted);border:1px solid var(--border);white-space:nowrap;cursor:pointer;">Adobe license request</div>
         </div>
       </div>
 
