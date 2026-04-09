@@ -761,6 +761,93 @@
     .sb-source-label { color: rgba(91,155,245,0.5); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
     .sb-source-value { color: var(--color-blue); font-weight: 500; font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
 
+    /* ══ Ask Chat Overlay ══ */
+    .ask-overlay {
+      display: none; position: fixed;
+      bottom: 24px; left: 240px;
+      width: 440px; max-height: 520px;
+      background: var(--bg-card); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      z-index: 200; flex-direction: column; overflow: hidden;
+    }
+    .ask-overlay.open { display: flex; }
+
+    .ask-overlay-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 18px; border-bottom: 1px solid var(--border);
+    }
+    .ask-overlay-header-icon {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--accent-soft);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .ask-overlay-header-icon svg { width: 14px; height: 14px; color: var(--accent); }
+    .ask-overlay-title {
+      font-size: 14px; font-weight: 600; color: var(--text-primary); flex: 1;
+    }
+    .ask-overlay-subtitle {
+      font-size: 11px; color: var(--text-muted);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .ask-overlay-close {
+      width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); cursor: pointer; border-radius: 4px;
+      transition: all 0.12s;
+    }
+    .ask-overlay-close:hover { color: var(--text-primary); background: var(--bg-glass); }
+    .ask-overlay-close svg { width: 14px; height: 14px; }
+
+    .ask-overlay-messages {
+      flex: 1; overflow-y: auto; padding: 16px 18px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .ask-msg {
+      font-size: 13px; line-height: 1.6; max-width: 90%;
+    }
+    .ask-msg.user {
+      align-self: flex-end; color: var(--text-primary);
+      background: var(--bg-glass); border: 1px solid var(--border);
+      padding: 8px 12px; border-radius: 12px; border-top-right-radius: 4px;
+    }
+    .ask-msg.agent {
+      align-self: flex-start; color: var(--text-secondary);
+      padding: 8px 0;
+    }
+    .ask-msg.agent strong { color: var(--text-primary); }
+    .ask-typing {
+      display: flex; gap: 4px; padding: 8px 0; align-self: flex-start;
+    }
+    .ask-typing-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--text-muted); animation: askBounce 1.4s infinite;
+    }
+    .ask-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .ask-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes askBounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
+    }
+
+    .ask-overlay-input {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 18px; border-top: 1px solid var(--border);
+    }
+    .ask-overlay-input input {
+      flex: 1; background: none; border: none; outline: none;
+      font-size: 13px; font-family: 'DM Sans', sans-serif;
+      color: var(--text-primary);
+    }
+    .ask-overlay-input input::placeholder { color: var(--text-muted); }
+    .ask-overlay-send {
+      width: 28px; height: 28px; border-radius: 6px;
+      background: var(--accent); border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .ask-overlay-send svg { width: 12px; height: 12px; color: #fff; }
+
     /* Responsive */
     @media (max-width: 1200px) { }
     @media (max-width: 1024px) {
@@ -1256,6 +1343,30 @@
     </div>
   </div>
 
+<!-- Ask Chat Overlay -->
+<div class="ask-overlay" id="askOverlay">
+  <div class="ask-overlay-header">
+    <div class="ask-overlay-header-icon">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg>
+    </div>
+    <div>
+      <div class="ask-overlay-title">Ask</div>
+      <div class="ask-overlay-subtitle">TKT-4471 context</div>
+    </div>
+    <div class="ask-overlay-close" onclick="closeAskOverlay()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+  <div class="ask-overlay-messages" id="askMessages">
+  </div>
+  <div class="ask-overlay-input">
+    <input type="text" id="askOverlayInput" placeholder="Ask a follow-up..." onkeydown="if(event.key==='Enter')sendAskMessage()">
+    <button class="ask-overlay-send" onclick="sendAskMessage()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
+
 <script>
   // Sidebar collapse
   document.querySelectorAll('.sb-section-header').forEach(header => {
@@ -1311,33 +1422,85 @@
     });
   });
 
-  // Chat prompts type into the Ask bar
+  // Ask overlay functions
+  const askOverlay = document.getElementById('askOverlay');
+  const askMessages = document.getElementById('askMessages');
+  const askInput = document.getElementById('askOverlayInput');
+
+  function openAskOverlay(question) {
+    askOverlay.classList.add('open');
+    askMessages.innerHTML = '';
+    // Show the user's question
+    const userMsg = document.createElement('div');
+    userMsg.className = 'ask-msg user';
+    userMsg.textContent = question;
+    askMessages.appendChild(userMsg);
+    // Show typing indicator then a mock response
+    const typing = document.createElement('div');
+    typing.className = 'ask-typing';
+    typing.innerHTML = '<div class="ask-typing-dot"></div><div class="ask-typing-dot"></div><div class="ask-typing-dot"></div>';
+    askMessages.appendChild(typing);
+    setTimeout(() => {
+      typing.remove();
+      const agentMsg = document.createElement('div');
+      agentMsg.className = 'ask-msg agent';
+      agentMsg.innerHTML = getMockResponse(question);
+      askMessages.appendChild(agentMsg);
+      askMessages.scrollTop = askMessages.scrollHeight;
+    }, 1500);
+  }
+
+  function closeAskOverlay() {
+    askOverlay.classList.remove('open');
+  }
+
+  function sendAskMessage() {
+    const text = askInput.value.trim();
+    if (!text) return;
+    const userMsg = document.createElement('div');
+    userMsg.className = 'ask-msg user';
+    userMsg.textContent = text;
+    askMessages.appendChild(userMsg);
+    askInput.value = '';
+    const typing = document.createElement('div');
+    typing.className = 'ask-typing';
+    typing.innerHTML = '<div class="ask-typing-dot"></div><div class="ask-typing-dot"></div><div class="ask-typing-dot"></div>';
+    askMessages.appendChild(typing);
+    askMessages.scrollTop = askMessages.scrollHeight;
+    setTimeout(() => {
+      typing.remove();
+      const agentMsg = document.createElement('div');
+      agentMsg.className = 'ask-msg agent';
+      agentMsg.textContent = 'I\'ll look into that for you. Based on the ticket context, I can help investigate further.';
+      askMessages.appendChild(agentMsg);
+      askMessages.scrollTop = askMessages.scrollHeight;
+    }, 1200);
+  }
+
+  function getMockResponse(q) {
+    if (q.includes('similar issues')) {
+      return '<strong>Yes — 14 other devices</strong> received the macOS 15.3 update but haven\'t gotten the GP v6.2.1 push yet. 3 users have already filed tickets (TKT-4480, TKT-4483, TKT-4479). The rest haven\'t reported issues yet but are likely affected. A bulk remediation was suggested by Operator Intelligence.';
+    } else if (q.includes('changed recently')) {
+      return 'Two recent changes on ACME-MC-4471:<br><br><strong>1. macOS 15.3 update</strong> — installed Mon night (auto-update).<br><strong>2. GlobalProtect v6.2.1</strong> — pushed last Friday via Jamf but never landed on this device. MDM last check-in was 18 hours ago, which may explain why.';
+    } else if (q.includes('self-service')) {
+      return 'Sarah opened the self-service portal at 9:47 AM reporting VPN failure. The agent identified the pending GP update and walked her through a manual install via Jamf Self Service. The install failed with "contact your administrator." Agent verified 12 GB free storage (sufficient), determined the issue was outside self-service scope, and escalated at 10:18 AM with a full remediation log.';
+    }
+    return 'Based on the ticket context, I can help investigate that. What specific aspect would you like me to look into?';
+  }
+
+  // Chat prompts open the overlay
   document.querySelectorAll('.catchup-prompt').forEach(prompt => {
     prompt.addEventListener('click', () => {
-      const askBar = document.querySelector('.ask-bar');
-      const input = document.getElementById('askBarInput');
-      const text = prompt.textContent;
-
-      // Scroll ask bar into view
-      askBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-      // Highlight the ask bar
-      askBar.classList.add('highlight');
-      setTimeout(() => askBar.classList.remove('highlight'), 2000);
-
-      // Type the prompt into the input
-      input.value = '';
-      input.focus();
-      let i = 0;
-      const interval = setInterval(() => {
-        if (i < text.length) {
-          input.value += text[i];
-          i++;
-        } else {
-          clearInterval(interval);
-        }
-      }, 25);
+      openAskOverlay(prompt.textContent);
     });
+  });
+
+  // Ask bar also opens the overlay
+  document.getElementById('askBarInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.target.value.trim()) {
+      openAskOverlay(e.target.value.trim());
+      e.target.value = '';
+    }
   });
 
   // Close all dropdowns and collapse empty composer when clicking outside
