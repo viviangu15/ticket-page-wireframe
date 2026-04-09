@@ -772,7 +772,7 @@
                   opacity 0.25s ease,
                   transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       pointer-events: none;
-      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      border-radius: 0;
     }
     .ask-overlay.open {
       height: 360px; opacity: 1;
@@ -1543,6 +1543,10 @@
       if (!textarea.value.trim()) {
         composer.classList.remove('open');
       }
+    }
+    // Close ask overlay if clicked outside
+    if (askOverlay.classList.contains('open') && !e.target.closest('.ask-overlay') && !e.target.closest('.catchup-prompt')) {
+      closeAskOverlay();
     }
   });
 </script>
