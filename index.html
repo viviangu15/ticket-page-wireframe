@@ -922,89 +922,6 @@
         </button>
       </div>
 
-      <div class="header-fields">
-        <div class="header-field">
-          <div class="header-field-label">Status</div>
-          <div class="status-dropdown-wrapper">
-            <div class="header-dropdown" data-status="in-progress" onclick="document.querySelector('.status-menu').classList.toggle('open')">
-              <span class="header-dropdown-text">In Progress</span>
-              <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </div>
-            <div class="status-menu">
-              <div class="status-option" data-value="open" data-label="Open">
-                <div class="status-dot open"></div>
-                <span class="status-option-label">Open</span>
-                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <div class="status-option selected" data-value="in-progress" data-label="In Progress">
-                <div class="status-dot in-progress"></div>
-                <span class="status-option-label">In Progress</span>
-                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <div class="status-option" data-value="waiting" data-label="Waiting for Reply">
-                <div class="status-dot waiting"></div>
-                <span class="status-option-label">Waiting for Reply</span>
-                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <div class="status-option" data-value="pending" data-label="Pending">
-                <div class="status-dot pending"></div>
-                <span class="status-option-label">Pending</span>
-                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <div class="status-option" data-value="resolved" data-label="Resolved">
-                <div class="status-dot resolved"></div>
-                <span class="status-option-label">Resolved</span>
-                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <div class="status-option" data-value="closed" data-label="Closed">
-                <div class="status-dot closed"></div>
-                <span class="status-option-label">Closed</span>
-                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="header-field">
-          <div class="header-field-label">Owner</div>
-          <div class="header-dropdown">
-            <div class="header-dropdown-icon avatar">BT</div>
-            <span class="header-dropdown-text">Ben Torres</span>
-            <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </div>
-        <div class="header-field">
-          <div class="header-field-label">Category</div>
-          <div class="header-dropdown">
-            <div class="header-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <span class="header-dropdown-text">Network Access</span>
-            <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </div>
-        <div class="header-field">
-          <div class="header-field-label">Queue</div>
-          <div class="queue-dropdown-wrapper" style="position:relative;">
-            <div class="header-dropdown" onclick="document.querySelector('.queue-menu').classList.toggle('open')">
-              <div class="header-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="header-dropdown-text queue-selected-text">Engineering</span>
-              <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </div>
-            <div class="queue-menu status-menu">
-              <div class="status-option selected" data-queue="Engineering">
-                <span class="status-option-label">Engineering</span>
-                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <div class="status-option" data-queue="HR">
-                <span class="status-option-label">HR</span>
-                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <div class="status-option" data-queue="Marketing">
-                <span class="status-option-label">Marketing</span>
-                <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- ══ BODY ══ -->
@@ -1259,9 +1176,91 @@
       <!-- ══ RIGHT SIDEBAR — progressive disclosure ══ -->
       <div class="right-sidebar">
 
-        <div class="sb-context-hint">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M4 7l4-4 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Sorted by relevance to this ticket
+        <!-- Ticket fields -->
+        <div class="sb-fields" style="padding:16px 20px;border-bottom:1px solid var(--border);">
+          <div class="header-fields" style="max-width:100%;">
+            <div class="header-field">
+              <div class="header-field-label">Status</div>
+              <div class="status-dropdown-wrapper">
+                <div class="header-dropdown" data-status="in-progress" onclick="document.querySelector('.status-menu').classList.toggle('open')">
+                  <span class="header-dropdown-text">In Progress</span>
+                  <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <div class="status-menu">
+                  <div class="status-option" data-value="open" data-label="Open">
+                    <div class="status-dot open"></div>
+                    <span class="status-option-label">Open</span>
+                    <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div class="status-option selected" data-value="in-progress" data-label="In Progress">
+                    <div class="status-dot in-progress"></div>
+                    <span class="status-option-label">In Progress</span>
+                    <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div class="status-option" data-value="waiting" data-label="Waiting for Reply">
+                    <div class="status-dot waiting"></div>
+                    <span class="status-option-label">Waiting for Reply</span>
+                    <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div class="status-option" data-value="pending" data-label="Pending">
+                    <div class="status-dot pending"></div>
+                    <span class="status-option-label">Pending</span>
+                    <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div class="status-option" data-value="resolved" data-label="Resolved">
+                    <div class="status-dot resolved"></div>
+                    <span class="status-option-label">Resolved</span>
+                    <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div class="status-option" data-value="closed" data-label="Closed">
+                    <div class="status-dot closed"></div>
+                    <span class="status-option-label">Closed</span>
+                    <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="header-field">
+              <div class="header-field-label">Owner</div>
+              <div class="header-dropdown">
+                <div class="header-dropdown-icon avatar">BT</div>
+                <span class="header-dropdown-text">Ben Torres</span>
+                <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </div>
+            <div class="header-field">
+              <div class="header-field-label">Category</div>
+              <div class="header-dropdown">
+                <div class="header-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <span class="header-dropdown-text">Network Access</span>
+                <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </div>
+            <div class="header-field">
+              <div class="header-field-label">Queue</div>
+              <div class="queue-dropdown-wrapper" style="position:relative;">
+                <div class="header-dropdown" onclick="document.querySelector('.queue-menu').classList.toggle('open')">
+                  <div class="header-dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                  <span class="header-dropdown-text queue-selected-text">Engineering</span>
+                  <span class="header-dropdown-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <div class="queue-menu status-menu">
+                  <div class="status-option selected" data-queue="Engineering">
+                    <span class="status-option-label">Engineering</span>
+                    <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div class="status-option" data-queue="HR">
+                    <span class="status-option-label">HR</span>
+                    <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div class="status-option" data-queue="Marketing">
+                    <span class="status-option-label">Marketing</span>
+                    <svg class="status-option-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l4 4 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 1. Workflow — active, needs attention NOW -->
