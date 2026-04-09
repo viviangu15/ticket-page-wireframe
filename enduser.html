@@ -222,8 +222,8 @@
     .chat-input {
       flex: 1; background: none; border: none; outline: none;
       font-size: 14px; font-family: 'DM Sans', sans-serif;
-      color: var(--text-primary); resize: none;
-      min-height: 20px; max-height: 120px;
+      color: var(--text-primary);
+      height: 20px; line-height: 20px;
     }
     .chat-input::placeholder { color: var(--text-muted); }
     .chat-send-btn {
@@ -600,7 +600,7 @@
       <!-- Chat input -->
       <div class="chat-input-area">
         <div class="chat-input-wrapper">
-          <textarea class="chat-input" rows="1" placeholder="Type a message..."></textarea>
+          <input class="chat-input" type="text" placeholder="Type a message...">
           <button class="chat-send-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
