@@ -334,14 +334,21 @@
       display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap;
     }
     .catchup-prompt {
-      padding: 5px 12px; border-radius: 999px;
+      padding: 6px 14px; border-radius: 999px;
       font-size: 12px; font-weight: 500; cursor: pointer;
-      border: 1px solid var(--border); background: none;
-      color: var(--text-muted); transition: all 0.15s;
+      border: 1px solid var(--border-strong); background: var(--bg-glass);
+      color: var(--text-secondary); transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .catchup-prompt::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; opacity: 0.7;
     }
     .catchup-prompt:hover {
-      color: var(--text-secondary); border-color: var(--border-strong);
+      color: var(--text-primary); border-color: var(--accent);
+      background: var(--accent-soft);
     }
+    .catchup-prompt:hover::before { opacity: 1; }
 
     /* Actions — minimal list */
     .catchup-actions {
@@ -390,16 +397,17 @@
     }
 
     .composer-collapsed {
-      border-bottom: 1px dashed var(--border);
-      padding: 10px 0;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius);
+      padding: 10px 14px;
       font-size: 14px; color: var(--text-muted);
       cursor: text; transition: all 0.15s;
       display: flex; align-items: center; gap: 8px;
     }
     .composer-collapsed:hover {
-      border-color: var(--text-secondary); color: var(--text-secondary);
+      border-color: var(--text-muted); color: var(--text-secondary);
     }
-    .composer-collapsed svg { width: 14px; height: 14px; opacity: 0.4; }
+    .composer-collapsed svg { width: 14px; height: 14px; opacity: 0.5; }
 
     .composer-expanded {
       display: none;
