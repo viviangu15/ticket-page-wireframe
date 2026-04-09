@@ -1336,9 +1336,8 @@
     </div>
   </div>
 
-<!-- Ask backdrop -->
-<div id="askBackdrop" style="display:none;position:fixed;inset:0;z-index:199;background:rgba(0,0,0,0.3);"></div>
-<style>#askBackdrop.open { display: block; }</style>
+<!-- Ask backdrop (click to close) -->
+<div id="askBackdrop" onclick="document.getElementById('askOverlay').classList.remove('open');this.style.display='none';" style="display:none;position:fixed;inset:0;z-index:199;"></div>
 
 <!-- Ask Chat Overlay -->
 <div class="ask-overlay" id="askOverlay">
@@ -1482,6 +1481,7 @@
 
   function openAskOverlay(question) {
     askOverlay.classList.add('open');
+    document.getElementById('askBackdrop').style.display = 'block';
     askMessages.innerHTML = '';
     askMessages.appendChild(makeMsg('user', question));
     const typing = document.createElement('div');
@@ -1497,6 +1497,7 @@
 
   function closeAskOverlay() {
     askOverlay.classList.remove('open');
+    document.getElementById('askBackdrop').style.display = 'none';
   }
 
   function sendAskMessage() {
@@ -1526,6 +1527,11 @@
     }
     return 'Based on the ticket context, I can help investigate that. What specific aspect would you like me to look into?';
   }
+
+  // Escape key closes overlay
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeAskOverlay();
+  });
 
   // Chat prompts open the overlay
   document.querySelectorAll('.catchup-prompt').forEach(prompt => {
@@ -1563,33 +1569,6 @@
     }
   });
 
-  // Close ask overlay — backdrop click
-  const askBackdrop = document.getElementById('askBackdrop');
-  askBackdrop.addEventListener('click', () => {
-    document.getElementById('askOverlay').classList.remove('open');
-    askBackdrop.classList.remove('open');
-  });
-
-  // Show/hide backdrop with overlay
-  const origOpen = openAskOverlay;
-  const wrappedOpen = function(q) {
-    askBackdrop.classList.add('open');
-    origOpen(q);
-  };
-  // Patch prompt clicks
-  document.querySelectorAll('.catchup-prompt').forEach(prompt => {
-    prompt.removeEventListener('click', prompt._handler);
-    prompt.addEventListener('click', () => {
-      askBackdrop.classList.add('open');
-      openAskOverlay(prompt.textContent);
-    });
-  });
-
-  const origClose = closeAskOverlay;
-  closeAskOverlay = function() {
-    document.getElementById('askOverlay').classList.remove('open');
-    askBackdrop.classList.remove('open');
-  };
 </script>
 
 </body>
