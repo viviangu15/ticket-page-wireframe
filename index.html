@@ -571,7 +571,11 @@
       border-radius: 4px;
     }
     .tl-item:hover { background: var(--bg-glass); }
+    .tl-item:hover .tl-actor,
+    .tl-item:hover .tl-detail { color: var(--accent); }
     .tl-item.selected { background: var(--bg-glass); color: var(--text-secondary); }
+    .tl-item.selected .tl-actor,
+    .tl-item.selected .tl-detail { color: var(--accent); }
     .tl-item .tl-dot {
       position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
       width: 22px; height: 22px; border-radius: 50%;
