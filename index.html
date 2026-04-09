@@ -329,14 +329,13 @@
     /* Suggested actions */
     .catchup-actions {
       display: flex; flex-direction: column; gap: 0; margin-top: 16px;
-      margin-left: -14px; margin-right: -14px;
     }
     .catchup-action {
       display: flex; align-items: flex-start; gap: 12px;
-      padding: 10px 14px;
+      padding: 10px 0;
       cursor: pointer; transition: background 0.12s;
     }
-    .catchup-action:hover { background: var(--bg-glass); }
+    .catchup-action:hover { background: var(--bg-glass); border-radius: var(--radius); }
     .catchup-action-arrow {
       width: 16px; display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; margin-top: 2px;
@@ -346,7 +345,7 @@
     }
     .catchup-action:hover .catchup-action-arrow svg { color: var(--accent); }
     .catchup-action-divider {
-      height: 1px; background: var(--border); margin: 0 14px;
+      height: 1px; background: var(--border); margin: 0;
     }
     .catchup-action-content { flex: 1; }
     .catchup-action-title {
