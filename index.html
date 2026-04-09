@@ -1157,22 +1157,8 @@
       <!-- ══ RIGHT SIDEBAR — progressive disclosure ══ -->
       <div class="right-sidebar">
 
-        <!-- Detail panel — shows when clicking a timeline item -->
-        <div class="sb-detail-panel" id="detailPanel">
-          <div class="sb-detail-header">
-            <div>
-              <div class="sb-detail-title" id="detailTitle"></div>
-              <div class="sb-detail-time" id="detailTime"></div>
-            </div>
-            <div class="sb-detail-close" onclick="closeDetail()">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round"/></svg>
-            </div>
-          </div>
-          <div class="sb-detail-body" id="detailBody"></div>
-        </div>
-
-        <!-- Ticket fields -->
-        <div class="sb-fields" style="padding:16px 20px;border-bottom:1px solid var(--border);">
+        <!-- Ticket fields — always on top -->
+        <div class="sb-fields" style="padding:16px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg-raised);z-index:10;">
           <div class="header-fields" style="max-width:100%;">
             <div class="header-field">
               <div class="header-field-label">Status</div>
@@ -1256,6 +1242,20 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- Detail panel — shows when clicking a timeline item -->
+        <div class="sb-detail-panel" id="detailPanel">
+          <div class="sb-detail-header">
+            <div>
+              <div class="sb-detail-title" id="detailTitle"></div>
+              <div class="sb-detail-time" id="detailTime"></div>
+            </div>
+            <div class="sb-detail-close" onclick="closeDetail()">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+          <div class="sb-detail-body" id="detailBody"></div>
         </div>
 
         <!-- 1. Workflow — active, needs attention NOW -->
