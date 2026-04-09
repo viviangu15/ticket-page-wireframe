@@ -316,14 +316,13 @@
     .catchup-body a:hover { border-color: var(--accent); color: var(--accent); }
     .catchup-body a { position: relative; }
     .person-card {
-      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%;
-      transform: translateX(-50%);
+      display: none; position: fixed;
       background: var(--bg-card); border: 1px solid var(--border-strong);
       border-radius: var(--radius); padding: 12px 14px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      z-index: 100; white-space: nowrap; min-width: 200px;
+      z-index: 300; white-space: nowrap; min-width: 220px;
+      pointer-events: none;
     }
-    .catchup-body a:hover .person-card { display: block; }
     .person-card-row {
       display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
     }
@@ -1430,6 +1429,21 @@
       // Update the button icon to match
       visBtn.querySelector('svg:first-child').outerHTML = option.querySelector('.vis-option-icon').outerHTML.replace('vis-option-icon', '');
       visMenu.classList.remove('open');
+    });
+  });
+
+  // Person card hover positioning
+  document.querySelectorAll('.catchup-body a').forEach(link => {
+    const card = link.querySelector('.person-card');
+    if (!card) return;
+    link.addEventListener('mouseenter', () => {
+      const rect = link.getBoundingClientRect();
+      card.style.left = rect.left + 'px';
+      card.style.bottom = (window.innerHeight - rect.top + 8) + 'px';
+      card.style.display = 'block';
+    });
+    link.addEventListener('mouseleave', () => {
+      card.style.display = 'none';
     });
   });
 
