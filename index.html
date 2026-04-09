@@ -771,18 +771,27 @@
 
     /* ══ Ask Chat Overlay ══ */
     .ask-overlay {
-      display: none; position: fixed;
-      bottom: 0; left: var(--left-nav-width); right: 0;
-      height: 0;
+      position: fixed;
+      bottom: 0; left: var(--left-nav-width);
+      width: 60%;
       background: var(--bg-card);
       border-top: 1px solid var(--border-strong);
+      border-right: 1px solid var(--border);
       box-shadow: 0 -8px 32px rgba(0,0,0,0.4);
       z-index: 200; flex-direction: column; overflow: hidden;
-      transition: height 0.3s ease;
+      display: flex;
+      height: 0; opacity: 0;
+      transform: translateY(20px);
+      transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.25s ease,
+                  transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     }
     .ask-overlay.open {
-      display: flex;
-      height: 340px;
+      height: 360px; opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
     .ask-overlay-header {
