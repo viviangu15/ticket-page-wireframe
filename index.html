@@ -408,6 +408,7 @@
       border: 1px solid var(--border-strong);
       border-radius: var(--radius);
       overflow: visible;
+      position: relative;
     }
     .composer-inline.open .composer-collapsed { display: none; }
     .composer-inline.open .composer-expanded { display: block; }
@@ -450,10 +451,10 @@
     .visibility-btn .vis-chevron { width: 8px; height: 8px; opacity: 0.5; }
 
     .visibility-menu {
-      display: none; position: absolute; bottom: calc(100% + 4px); right: 0;
-      width: 240px; background: var(--bg-card); border: 1px solid var(--border-strong);
-      border-radius: var(--radius); padding: 4px; z-index: 50;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      display: none; position: fixed;
+      width: 260px; background: var(--bg-card); border: 1px solid var(--border-strong);
+      border-radius: var(--radius); padding: 4px; z-index: 200;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
     }
     .visibility-menu.open { display: block; }
     .vis-option {
@@ -1080,7 +1081,7 @@
                   Attach
                 </div>
                 <div class="visibility-wrapper">
-                  <div class="visibility-btn" data-vis="only-me" onclick="event.stopPropagation();document.querySelector('.visibility-menu').classList.toggle('open')">
+                  <div class="visibility-btn" data-vis="only-me" onclick="event.stopPropagation();toggleVisMenu(this)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M5.8 21a7.5 7.5 0 0112.4 0" stroke-linecap="round"/></svg>
                     <span class="vis-btn-label">Only me</span>
                     <svg class="vis-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1418,6 +1419,18 @@
   // Visibility dropdown
   const visMenu = document.querySelector('.visibility-menu');
   const visBtn = document.querySelector('.visibility-btn');
+
+  function toggleVisMenu(btn) {
+    const isOpen = visMenu.classList.contains('open');
+    if (isOpen) {
+      visMenu.classList.remove('open');
+    } else {
+      const rect = btn.getBoundingClientRect();
+      visMenu.style.left = rect.left + 'px';
+      visMenu.style.bottom = (window.innerHeight - rect.top + 4) + 'px';
+      visMenu.classList.add('open');
+    }
+  }
 
   document.querySelectorAll('.vis-option').forEach(option => {
     option.addEventListener('click', (e) => {
