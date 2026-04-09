@@ -500,6 +500,14 @@
       font-family: 'Hanken Grotesk', sans-serif;
       font-size: 15px; font-weight: 700; color: var(--text-primary);
     }
+    .tl-sort-btn {
+      width: 24px; height: 24px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--text-muted); transition: all 0.12s;
+    }
+    .tl-sort-btn:hover { color: var(--text-secondary); background: var(--bg-glass); }
+    .tl-sort-btn svg { width: 14px; height: 14px; }
+    .tl-sort-btn.asc svg { transform: scaleY(-1); }
     .timeline-filters { display: flex; gap: 0; }
     .tl-filter {
       padding: 5px 14px; font-size: 12px; font-weight: 600;
@@ -1123,6 +1131,9 @@
         <div class="timeline-header">
           <div class="timeline-header-row">
             <div class="timeline-title">Activity</div>
+            <div class="tl-sort-btn" id="sortBtn" onclick="toggleSort()" title="Toggle sort order">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 3v10M4 13l-3-3M4 13l3-3M12 13V3M12 3l-3 3M12 3l3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
             <div class="timeline-filters">
               <div class="tl-filter active">All<span class="count">9</span></div>
               <div class="tl-filter">Comments</div>
@@ -1421,6 +1432,18 @@
       visMenu.classList.remove('open');
     });
   });
+
+  // Sort toggle
+  function toggleSort() {
+    const btn = document.getElementById('sortBtn');
+    const timeline = document.querySelector('.timeline');
+    const items = Array.from(timeline.children);
+    items.reverse();
+    timeline.innerHTML = '';
+    items.forEach(item => timeline.appendChild(item));
+    btn.classList.toggle('asc');
+    btn.title = btn.classList.contains('asc') ? 'Oldest first' : 'Newest first';
+  }
 
   // Ask overlay functions
   const askOverlay = document.getElementById('askOverlay');
