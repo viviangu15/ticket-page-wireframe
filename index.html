@@ -314,6 +314,31 @@
       transition: border-color 0.15s;
     }
     .catchup-body a:hover { border-color: var(--accent); color: var(--accent); }
+    .catchup-body a { position: relative; }
+    .person-card {
+      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-card); border: 1px solid var(--border-strong);
+      border-radius: var(--radius); padding: 12px 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      z-index: 100; white-space: nowrap; min-width: 200px;
+    }
+    .catchup-body a:hover .person-card { display: block; }
+    .person-card-row {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+    }
+    .person-card-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .person-card-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .person-card-title { font-size: 12px; color: var(--text-muted); }
+    .person-card-detail {
+      font-size: 12px; color: var(--text-secondary);
+      display: flex; align-items: center; gap: 6px; margin-top: 4px;
+    }
+    .person-card-detail svg { width: 12px; height: 12px; color: var(--text-muted); }
 
     /* Prompts — lightweight pills */
     .catchup-prompts {
@@ -942,7 +967,7 @@
         <!-- Catch-up card -->
         <div class="catchup-area">
           <div class="catchup-body">
-            <a href="#">Sarah</a>'s VPN broke after a macOS update. Self-service failed, so <a href="#">Ben</a> pushed the fix remotely. Waiting to confirm it worked.
+            <a href="#">Sarah<div class="person-card"><div class="person-card-row"><div class="person-card-avatar" style="background:var(--color-blue);">SC</div><div><div class="person-card-name">Sarah Chen</div><div class="person-card-title">Senior Data Engineer</div></div></div><div class="person-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round"/><circle cx="9" cy="7" r="4"/></svg>Data Engineering</div><div class="person-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-linecap="round"/><polyline points="22,6 12,13 2,6" stroke-linecap="round"/></svg>sarah.chen@acme.com</div></div></a>'s VPN broke after a macOS update. Self-service failed, so <a href="#">Ben<div class="person-card"><div class="person-card-row"><div class="person-card-avatar" style="background:var(--accent);">BT</div><div><div class="person-card-name">Ben Torres</div><div class="person-card-title">L2 Support Engineer</div></div></div><div class="person-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round"/><circle cx="9" cy="7" r="4"/></svg>IT Support</div><div class="person-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-linecap="round"/><polyline points="22,6 12,13 2,6" stroke-linecap="round"/></svg>ben.torres@acme.com</div></div></a> pushed the fix remotely. Waiting to confirm it worked.
           </div>
           <div class="catchup-prompts">
             <div class="catchup-prompt">Are there other users with similar issues?</div>
@@ -1555,13 +1580,17 @@
     }
   });
 
-  // Close ask overlay if clicked outside (separate listener)
-  document.addEventListener('mousedown', (e) => {
-    const overlay = document.getElementById('askOverlay');
-    if (overlay.classList.contains('open') && !e.target.closest('#askOverlay') && !e.target.closest('.catchup-prompt')) {
-      overlay.classList.remove('open');
+  // Close ask overlay if clicked outside
+  window.addEventListener('mousedown', (e) => {
+    const el = document.getElementById('askOverlay');
+    if (!el.classList.contains('open')) return;
+    let target = e.target;
+    while (target) {
+      if (target.id === 'askOverlay' || target.classList.contains('catchup-prompt')) return;
+      target = target.parentElement;
     }
-  });
+    el.classList.remove('open');
+  }, true);
 </script>
 
 </body>
