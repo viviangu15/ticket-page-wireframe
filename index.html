@@ -1581,13 +1581,20 @@
   });
 
   // Collapse composer if clicked outside and textarea is empty
-  window.addEventListener('mousedown', (e) => {
-    const composer = document.getElementById('composerInline');
-    if (!composer.classList.contains('open')) return;
-    if (e.target.closest('.composer-inline')) return;
-    const textarea = composer.querySelector('.composer-textarea');
-    if (!textarea.value.trim()) {
-      composer.classList.remove('open');
+  document.body.addEventListener('mousedown', function(e) {
+    var composer = document.getElementById('composerInline');
+    if (!composer || !composer.classList.contains('open')) return;
+    var inside = false;
+    var el = e.target;
+    while (el) {
+      if (el === composer || (el.classList && el.classList.contains('visibility-menu'))) { inside = true; break; }
+      el = el.parentElement;
+    }
+    if (!inside) {
+      var textarea = composer.querySelector('.composer-textarea');
+      if (!textarea.value.trim()) {
+        composer.classList.remove('open');
+      }
     }
   }, true);
 
