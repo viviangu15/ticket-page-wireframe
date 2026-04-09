@@ -561,80 +561,70 @@
       background: var(--border);
     }
 
-    /* Minor events: plain text inline with the line */
-    .tl-minor {
-      position: relative; padding-left: 44px; padding-bottom: 16px;
+    /* Timeline items — all one-liners, clickable */
+    .tl-item {
+      position: relative; padding-left: 44px; padding-bottom: 12px;
       display: flex; align-items: center; gap: 8px;
       font-size: 14px; color: var(--text-muted);
+      cursor: pointer; transition: color 0.12s;
+      margin: 0 -8px; padding-right: 8px; padding-left: 52px;
+      border-radius: 4px;
     }
-    .tl-minor .tl-dot {
-      position: absolute; left: 5px; top: 1px;
+    .tl-item:hover { background: var(--bg-glass); }
+    .tl-item.selected { background: var(--bg-glass); color: var(--text-secondary); }
+    .tl-item .tl-dot {
+      position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
       width: 22px; height: 22px; border-radius: 50%;
       background: var(--bg); border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
     }
-    .tl-minor .tl-dot svg {
+    .tl-item .tl-dot svg {
       width: 11px; height: 11px; color: var(--text-muted);
       stroke: currentColor; fill: none; stroke-width: 1.5;
     }
-    .tl-minor .tl-minor-actor { font-weight: 600; color: var(--text-secondary); }
-    .tl-minor .tl-minor-action { color: var(--text-muted); }
-    .tl-minor .tl-minor-detail { color: var(--text-secondary); font-weight: 500; }
-    .tl-minor .tl-time {
+    .tl-item .tl-actor { font-weight: 600; color: var(--text-secondary); }
+    .tl-item .tl-action { color: var(--text-muted); }
+    .tl-item .tl-detail { color: var(--text-secondary); font-weight: 500; }
+    .tl-item .tl-time {
       margin-left: auto; font-size: 11px; color: var(--text-muted);
       font-family: 'IBM Plex Mono', monospace; white-space: nowrap; flex-shrink: 0;
     }
-    .tl-minor .tl-old { text-decoration: line-through; color: var(--text-muted); }
-    .tl-minor .tl-arrow { color: var(--text-muted); }
-
-    /* Rich events: cards (comments, running workflows, AI) */
-    .tl-rich {
-      position: relative; padding-left: 44px; padding-bottom: 24px;
-    }
-    .tl-rich .tl-dot {
-      position: absolute; left: 5px; top: 2px;
-      width: 22px; height: 22px; border-radius: 50%;
-      background: var(--bg); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .tl-rich .tl-dot svg {
-      width: 11px; height: 11px; color: var(--text-muted);
-      stroke: currentColor; fill: none; stroke-width: 1.5;
+    .tl-item .tl-old { text-decoration: line-through; color: var(--text-muted); }
+    .tl-item .tl-arrow { color: var(--text-muted); }
+    .tl-item.has-detail::after {
+      content: ''; width: 4px; height: 4px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; opacity: 0.6;
     }
 
-    .tl-rich-header {
-      display: flex; align-items: baseline; gap: 8px;
-      font-size: 14px; color: var(--text-secondary); margin-bottom: 6px;
+    /* Detail panel in sidebar */
+    .sb-detail-panel {
+      display: none; border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
     }
-    .tl-rich-actor { font-weight: 600; color: var(--text-primary); white-space: nowrap; }
-    .tl-rich-action { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .tl-rich-time {
-      margin-left: auto; font-size: 11px; color: var(--text-muted);
-      white-space: nowrap; font-family: 'IBM Plex Mono', monospace; flex-shrink: 0;
+    .sb-detail-panel.open { display: block; }
+    .sb-detail-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 10px;
     }
-    .tl-rich-label {
-      font-size: 10px; font-weight: 600; text-transform: uppercase;
-      color: var(--text-muted); font-family: 'IBM Plex Mono', monospace;
+    .sb-detail-title {
+      font-size: 12px; font-weight: 600; color: var(--text-primary);
     }
-
-    .tl-card {
-      padding: 4px 0 0;
-      font-size: 14px; color: var(--text-secondary);
-    }
-    .tl-card.internal {
-      color: var(--text-muted);
-    }
-    .tl-card p { margin-bottom: 6px; }
-    .tl-card p:last-child { margin-bottom: 0; }
-    .tl-card strong { color: var(--text-primary); font-weight: 600; }
-
-    /* Visibility tag on comments */
-    .tl-visibility {
-      font-size: 10px; color: var(--text-muted);
+    .sb-detail-time {
+      font-size: 11px; color: var(--text-muted);
       font-family: 'IBM Plex Mono', monospace;
-      display: flex; align-items: center; gap: 4px;
     }
-    .tl-visibility svg { width: 10px; height: 10px; }
+    .sb-detail-close {
+      width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); cursor: pointer; border-radius: 4px;
+    }
+    .sb-detail-close:hover { color: var(--text-primary); background: var(--bg-glass); }
+    .sb-detail-close svg { width: 12px; height: 12px; }
+    .sb-detail-body {
+      font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+    }
+    .sb-detail-body strong { color: var(--text-primary); }
+    .sb-detail-body p { margin-bottom: 6px; }
+    .sb-detail-body p:last-child { margin-bottom: 0; }
 
     /* ══ RIGHT SIDEBAR ══ */
     .right-sidebar {
@@ -1087,120 +1077,77 @@
           </div>
         </div>
 
-        <!-- ══ TIMELINE — GitHub-style ══ -->
+        <!-- ══ TIMELINE — all one-liners, click for details ══ -->
         <div class="timeline">
 
-          <!-- Rich: Running workflow -->
-          <div class="tl-rich">
+          <div class="tl-item has-detail" data-title="Jamf push command sent" data-time="10:25 AM" data-detail="Pushing GlobalProtect v6.2.1 to ACME-MC-4471 via Jamf. Polling for completion (30s intervals, 10 min timeout).">
             <div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="tl-rich-header">
-              <span class="tl-rich-actor">System</span>
-              <span class="tl-rich-action">Jamf push command sent</span>
-              <span class="tl-rich-time">10:25 AM</span>
-            </div>
-            <div class="tl-card">
-              <p>Pushing GlobalProtect v6.2.1 to ACME-MC-4471 via Jamf. Polling for completion (30s intervals, 10 min timeout).</p>
-            </div>
+            <span class="tl-actor">System</span>
+            <span class="tl-action">Jamf push command sent</span>
+            <span class="tl-time">10:25 AM</span>
           </div>
 
-          <!-- Minor: Status change -->
-          <div class="tl-minor">
+          <div class="tl-item">
             <div class="tl-dot"><svg viewBox="0 0 16 16"><path d="M2 8h12M10 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <span class="tl-minor-actor">Ben Torres</span>
-            <span class="tl-minor-action">changed status</span>
+            <span class="tl-actor">Ben Torres</span>
+            <span class="tl-action">changed status</span>
             <span class="tl-old">Escalated</span>
             <span class="tl-arrow">&rarr;</span>
-            <span class="tl-minor-detail">In Progress</span>
+            <span class="tl-detail">In Progress</span>
             <span class="tl-time">10:24 AM</span>
           </div>
 
-          <!-- Rich: AI suggestion -->
-          <div class="tl-rich">
+          <div class="tl-item has-detail" data-title="AI suggested remediation" data-time="10:22 AM" data-detail="<strong>Suggested action:</strong> Push GP v6.2.1 to ACME-MC-4471 via Jamf.<br><br>14 other devices in the same state — consider bulk push after verification.<br><br><span style='font-size:12px;color:var(--text-muted);font-family:IBM Plex Mono,monospace;'>92% confidence · device state + CR-2024-0847 + 3 similar tickets</span>">
             <div class="tl-dot"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z"/></svg></div>
-            <div class="tl-rich-header">
-              <span class="tl-rich-actor">Operator Intelligence</span>
-              <span class="tl-rich-action">suggested remediation</span>
-              <span class="tl-rich-time">10:22 AM</span>
-            </div>
-            <div class="tl-card">
-              <p><strong>Suggested action:</strong> Push GP v6.2.1 to ACME-MC-4471 via Jamf.</p>
-              <p>14 other devices in the same state — consider bulk push after verification.</p>
-              <p style="font-size:11px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">92% confidence · device state + CR-2024-0847 + 3 similar tickets</p>
-            </div>
+            <span class="tl-actor">Operator Intelligence</span>
+            <span class="tl-action">suggested remediation</span>
+            <span class="tl-time">10:22 AM</span>
           </div>
 
-          <!-- Minor: Assignment -->
-          <div class="tl-minor">
+          <div class="tl-item">
             <div class="tl-dot"><svg viewBox="0 0 16 16"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke-linecap="round"/></svg></div>
-            <span class="tl-minor-action">assigned to</span>
-            <span class="tl-minor-detail">Ben Torres</span>
-            <span class="tl-minor-action">(L2 Support)</span>
+            <span class="tl-action">assigned to</span>
+            <span class="tl-detail">Ben Torres</span>
+            <span class="tl-action">(L2 Support)</span>
             <span class="tl-time">10:20 AM</span>
           </div>
 
-          <!-- Minor: Sync -->
-          <div class="tl-minor">
+          <div class="tl-item">
             <div class="tl-dot"><svg viewBox="0 0 16 16"><path d="M2 8a6 6 0 0110.5-4M14 8a6 6 0 01-10.5 4" stroke-linecap="round"/><path d="M12 2v4h-4M4 14v-4h4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <span class="tl-minor-action">synced to ServiceNow as</span>
-            <span class="tl-minor-detail">#3154</span>
+            <span class="tl-action">synced to ServiceNow as</span>
+            <span class="tl-detail">#3154</span>
             <span class="tl-time">10:19 AM</span>
           </div>
 
-          <!-- Rich: Escalation with remediation log -->
-          <div class="tl-rich">
+          <div class="tl-item has-detail" data-title="Escalated to operator queue" data-time="10:18 AM" data-detail="<strong>Remediation log:</strong><br><br>Pass — Identified pending GP v6.2.1 update<br>Pass — User attempted manual install via Jamf Self Service<br>Fail — Installation failed — 'contact your administrator'<br>Pass — Verified 12 GB free disk space<br>→ Requires admin-level Jamf push">
             <div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="tl-rich-header">
-              <span class="tl-rich-actor">Self-Service Agent</span>
-              <span class="tl-rich-action">escalated to operator queue</span>
-              <span class="tl-rich-time">10:18 AM</span>
-            </div>
-            <div class="tl-card">
-              <p><strong>Remediation log:</strong></p>
-              <p style="line-height:1.8;">
-                 <span style="color:var(--color-teal);">Pass</span> — Identified pending GP v6.2.1 update<br>
-                 <span style="color:var(--color-teal);">Pass</span> — User attempted manual install via Jamf Self Service<br>
-                 <span style="color:var(--color-red);">Fail</span> — Installation failed — "contact your administrator"<br>
-                 <span style="color:var(--color-teal);">Pass</span> — Verified 12 GB free disk space<br>
-                 <span style="color:var(--text-muted);">&rarr;</span> Requires admin-level Jamf push</p>
-            </div>
+            <span class="tl-actor">Self-Service Agent</span>
+            <span class="tl-action">escalated to operator queue</span>
+            <span class="tl-time">10:18 AM</span>
           </div>
 
-          <!-- Rich: Internal note -->
-          <div class="tl-rich">
+          <div class="tl-item has-detail" data-title="Internal note" data-time="10:15 AM" data-detail="12 GB free storage confirmed. Sufficient for GP update (~200 MB). Failure not disk-related. Escalating.">
             <div class="tl-dot"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke-linecap="round"/></svg></div>
-            <div class="tl-rich-header">
-              <span class="tl-rich-actor">Self-Service Agent</span>
-              <span class="tl-rich-action">added a note</span>
-              <span class="tl-visibility"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="12" height="7" rx="1.5"/><path d="M5 7V5a3 3 0 016 0v2" stroke-linecap="round"/></svg> Internal</span>
-              <span class="tl-rich-time">10:15 AM</span>
-            </div>
-            <div class="tl-card internal">
-              <p>12 GB free storage confirmed. Sufficient for GP update (~200 MB). Failure not disk-related. Escalating.</p>
-            </div>
+            <span class="tl-actor">Self-Service Agent</span>
+            <span class="tl-action">added internal note</span>
+            <span class="tl-time">10:15 AM</span>
           </div>
 
-          <!-- Minor: Priority change -->
-          <div class="tl-minor">
+          <div class="tl-item">
             <div class="tl-dot"><svg viewBox="0 0 16 16"><path d="M8 3v10M4 7l4-4 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <span class="tl-minor-action">priority auto-promoted</span>
+            <span class="tl-action">priority auto-promoted</span>
             <span class="tl-old">P3</span>
             <span class="tl-arrow">&rarr;</span>
-            <span class="tl-minor-detail">P2</span>
-            <span class="tl-minor-action">(urgency detected)</span>
+            <span class="tl-detail">P2</span>
+            <span class="tl-action">(urgency detected)</span>
             <span class="tl-time">9:48 AM</span>
           </div>
 
-          <!-- Rich: Ticket created -->
-          <div class="tl-rich">
+          <div class="tl-item has-detail" data-title="Ticket created" data-time="9:47 AM" data-detail="&quot;I can't connect to VPN. Updated macOS last night and now GlobalProtect just spins. I have a critical data pipeline deploy at 11 AM.&quot;">
             <div class="tl-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01" stroke-linecap="round"/></svg></div>
-            <div class="tl-rich-header">
-              <span class="tl-rich-actor">Self-Service Agent</span>
-              <span class="tl-rich-action">ticket created</span>
-              <span class="tl-rich-time">9:47 AM</span>
-            </div>
-            <div class="tl-card">
-              <p>"I can't connect to VPN. Updated macOS last night and now GlobalProtect just spins. I have a critical data pipeline deploy at 11 AM."</p>
-            </div>
+            <span class="tl-actor">Self-Service Agent</span>
+            <span class="tl-action">ticket created</span>
+            <span class="tl-time">9:47 AM</span>
           </div>
 
         </div>
@@ -1209,6 +1156,20 @@
 
       <!-- ══ RIGHT SIDEBAR — progressive disclosure ══ -->
       <div class="right-sidebar">
+
+        <!-- Detail panel — shows when clicking a timeline item -->
+        <div class="sb-detail-panel" id="detailPanel">
+          <div class="sb-detail-header">
+            <div>
+              <div class="sb-detail-title" id="detailTitle"></div>
+              <div class="sb-detail-time" id="detailTime"></div>
+            </div>
+            <div class="sb-detail-close" onclick="closeDetail()">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+          <div class="sb-detail-body" id="detailBody"></div>
+        </div>
 
         <!-- Ticket fields -->
         <div class="sb-fields" style="padding:16px 20px;border-bottom:1px solid var(--border);">
@@ -1375,6 +1336,10 @@
     </div>
   </div>
 
+<!-- Ask backdrop -->
+<div id="askBackdrop" style="display:none;position:fixed;inset:0;z-index:199;background:rgba(0,0,0,0.3);"></div>
+<style>#askBackdrop.open { display: block; }</style>
+
 <!-- Ask Chat Overlay -->
 <div class="ask-overlay" id="askOverlay">
   <div class="ask-overlay-header">
@@ -1464,6 +1429,24 @@
       visMenu.classList.remove('open');
     });
   });
+
+  // Timeline item click — show detail in sidebar
+  document.querySelectorAll('.tl-item.has-detail').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.tl-item.selected').forEach(i => i.classList.remove('selected'));
+      item.classList.add('selected');
+      const panel = document.getElementById('detailPanel');
+      document.getElementById('detailTitle').textContent = item.dataset.title;
+      document.getElementById('detailTime').textContent = item.dataset.time;
+      document.getElementById('detailBody').innerHTML = item.dataset.detail;
+      panel.classList.add('open');
+    });
+  });
+
+  function closeDetail() {
+    document.getElementById('detailPanel').classList.remove('open');
+    document.querySelectorAll('.tl-item.selected').forEach(i => i.classList.remove('selected'));
+  }
 
   // Sort toggle
   function toggleSort() {
@@ -1580,17 +1563,33 @@
     }
   });
 
-  // Close ask overlay if clicked outside
-  window.addEventListener('mousedown', (e) => {
-    const el = document.getElementById('askOverlay');
-    if (!el.classList.contains('open')) return;
-    let target = e.target;
-    while (target) {
-      if (target.id === 'askOverlay' || target.classList.contains('catchup-prompt')) return;
-      target = target.parentElement;
-    }
-    el.classList.remove('open');
-  }, true);
+  // Close ask overlay — backdrop click
+  const askBackdrop = document.getElementById('askBackdrop');
+  askBackdrop.addEventListener('click', () => {
+    document.getElementById('askOverlay').classList.remove('open');
+    askBackdrop.classList.remove('open');
+  });
+
+  // Show/hide backdrop with overlay
+  const origOpen = openAskOverlay;
+  const wrappedOpen = function(q) {
+    askBackdrop.classList.add('open');
+    origOpen(q);
+  };
+  // Patch prompt clicks
+  document.querySelectorAll('.catchup-prompt').forEach(prompt => {
+    prompt.removeEventListener('click', prompt._handler);
+    prompt.addEventListener('click', () => {
+      askBackdrop.classList.add('open');
+      openAskOverlay(prompt.textContent);
+    });
+  });
+
+  const origClose = closeAskOverlay;
+  closeAskOverlay = function() {
+    document.getElementById('askOverlay').classList.remove('open');
+    askBackdrop.classList.remove('open');
+  };
 </script>
 
 </body>
