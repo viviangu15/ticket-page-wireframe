@@ -365,14 +365,14 @@
       display: flex; flex-direction: column; gap: 0; margin-top: 12px;
     }
     .catchup-action {
-      display: flex; align-items: flex-start; gap: 10px;
+      display: flex; align-items: center; gap: 10px;
       padding: 8px 0;
       cursor: pointer; transition: background 0.12s;
     }
     .catchup-action:hover { background: var(--bg-glass); }
     .catchup-action-arrow {
       width: 14px; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 3px;
+      flex-shrink: 0; margin-left: auto;
     }
     .catchup-action-arrow svg {
       width: 12px; height: 12px; color: var(--text-muted); transition: color 0.12s;
@@ -962,34 +962,45 @@
           <div class="catchup-body">
             <a href="#">Sarah<div class="person-card"><div class="person-card-row"><div class="person-card-avatar" style="background:var(--color-blue);">SC</div><div><div class="person-card-name">Sarah Chen</div><div class="person-card-title">Senior Data Engineer</div></div></div><div class="person-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round"/><circle cx="9" cy="7" r="4"/></svg>Data Engineering</div><div class="person-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-linecap="round"/><polyline points="22,6 12,13 2,6" stroke-linecap="round"/></svg>sarah.chen@acme.com</div></div></a>'s VPN broke after a macOS update. Self-service failed, so <a href="#">Ben<div class="person-card"><div class="person-card-row"><div class="person-card-avatar" style="background:var(--accent);">BT</div><div><div class="person-card-name">Ben Torres</div><div class="person-card-title">L2 Support Engineer</div></div></div><div class="person-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round"/><circle cx="9" cy="7" r="4"/></svg>IT Support</div><div class="person-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-linecap="round"/><polyline points="22,6 12,13 2,6" stroke-linecap="round"/></svg>ben.torres@acme.com</div></div></a> pushed the fix remotely. Waiting to confirm it worked.
           </div>
-          <div class="catchup-prompts">
-            <div class="catchup-prompt">Are there other users with similar issues?</div>
-            <div class="catchup-prompt">What changed recently on this device?</div>
-            <div class="catchup-prompt">Summarize the self-service conversation</div>
-          </div>
           <div class="catchup-actions">
             <div class="catchup-action">
-              <div class="catchup-action-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               <div class="catchup-action-content">
                 <div class="catchup-action-title">Check workflow status</div>
                 <div class="catchup-action-reason">Jamf push was sent 1 min ago — polling for device check-in</div>
               </div>
+              <div class="catchup-action-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             </div>
             <div class="catchup-action-divider"></div>
             <div class="catchup-action">
-              <div class="catchup-action-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               <div class="catchup-action-content">
                 <div class="catchup-action-title">Message Sarah</div>
                 <div class="catchup-action-reason">Her deploy deadline is 11:00 AM — she may need a workaround if the push takes longer</div>
               </div>
+              <div class="catchup-action-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             </div>
             <div class="catchup-action-divider"></div>
             <div class="catchup-action">
-              <div class="catchup-action-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               <div class="catchup-action-content">
                 <div class="catchup-action-title">View device in Axiom</div>
                 <div class="catchup-action-reason">MDM last check-in was 18 hours ago — may indicate a stale connection</div>
               </div>
+              <div class="catchup-action-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="catchup-action-divider"></div>
+            <div class="catchup-action">
+              <div class="catchup-action-content">
+                <div class="catchup-action-title">Are there other users with similar issues?</div>
+                <div class="catchup-action-reason">14 other devices in the same state — may need bulk remediation</div>
+              </div>
+              <div class="catchup-action-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="catchup-action-divider"></div>
+            <div class="catchup-action">
+              <div class="catchup-action-content">
+                <div class="catchup-action-title">What changed recently on this device?</div>
+                <div class="catchup-action-reason">Two changes detected — macOS update and pending GP rollout</div>
+              </div>
+              <div class="catchup-action-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             </div>
           </div>
         </div>
@@ -1054,6 +1065,7 @@
                   </div>
                 </div>
               </div>
+              <button class="btn btn-ghost btn-sm" style="display:flex;align-items:center;gap:5px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px;"><path d="M12 2l2.5 5.5L20 10l-5.5 2.5L12 18l-2.5-5.5L4 10l5.5-2.5L12 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Refine</button>
               <button class="btn btn-primary btn-sm">Send</button>
             </div>
           </div>
@@ -1552,11 +1564,14 @@
     if (e.key === 'Escape') closeAskOverlay();
   });
 
-  // Chat prompts open the overlay
-  document.querySelectorAll('.catchup-prompt').forEach(prompt => {
-    prompt.addEventListener('click', () => {
-      openAskOverlay(prompt.textContent);
-    });
+  // Investigation actions (questions) open the ask overlay
+  document.querySelectorAll('.catchup-action').forEach(action => {
+    const title = action.querySelector('.catchup-action-title');
+    if (title && title.textContent.includes('?')) {
+      action.addEventListener('click', () => {
+        openAskOverlay(title.textContent);
+      });
+    }
   });
 
   // Ask bar also opens the overlay
