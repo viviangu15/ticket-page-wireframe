@@ -146,6 +146,7 @@
     .msg-avatar.agent { background: var(--accent); color: #fff; padding: 5px; }
     .msg-avatar.agent svg { width: 100%; height: 100%; }
     .msg-avatar.user { background: var(--color-blue); }
+    .msg-avatar.staff { background: var(--color-teal); font-size: 10px; }
 
     .msg-content {}
     .msg-bubble {
@@ -161,6 +162,15 @@
       color: var(--text-primary);
       border-top-right-radius: 4px;
     }
+    .msg.staff .msg-bubble {
+      background: rgba(45,212,168,0.06); border: 1px solid rgba(45,212,168,0.12);
+      color: var(--text-secondary); border-top-left-radius: 4px;
+    }
+    .msg-staff-label {
+      font-size: 11px; font-weight: 600; color: var(--color-teal);
+      margin-bottom: 4px; display: flex; align-items: center; gap: 5px;
+    }
+    .msg-staff-label svg { width: 11px; height: 11px; }
     .msg-bubble strong { color: var(--text-primary); }
     .msg.user .msg-bubble strong { color: var(--text-primary); }
     .msg-time {
@@ -301,11 +311,28 @@
 
     .tp-divider { height: 1px; background: var(--border); margin: 16px 0; }
 
-    .tp-detail-row {
-      display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px;
+    /* Fields grid — matches app component style */
+    .tp-fields-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px 20px;
     }
-    .tp-detail-label { color: var(--text-muted); }
-    .tp-detail-value { color: var(--text-primary); font-weight: 500; }
+    .tp-field-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 6px;
+    }
+    .tp-field-value {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 500; color: var(--text-primary);
+    }
+    .tp-field-avatar {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .tp-field-icon {
+      width: 16px; height: 16px; color: var(--text-muted); flex-shrink: 0;
+    }
 
     /* Quick actions */
     .tp-actions-label {
@@ -540,14 +567,29 @@
           <span>Ticket escalated to IT Support</span>
         </div>
 
-        <!-- Resolution notification -->
+        <!-- IT staff message to the user -->
+        <div class="msg staff">
+          <div class="msg-avatar staff">BT</div>
+          <div class="msg-content">
+            <div class="msg-staff-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke-linecap="round"/><circle cx="12" cy="7" r="4"/></svg>
+              Ben Torres from IT Support
+            </div>
+            <div class="msg-bubble">
+              Hi Sarah — I've pushed the GlobalProtect update to your device remotely. It should install in the next few minutes. Can you try reconnecting to VPN once you see a GlobalProtect notification pop up? Let me know if it works.
+            </div>
+            <div class="msg-time">10:24 AM</div>
+          </div>
+        </div>
+
+        <!-- Agent relays the update -->
         <div class="msg agent">
           <div class="msg-avatar agent">
             <svg width="14" height="14" viewBox="88 134 324 228" fill="currentColor"><path d="M392.247,248.322c0-12.207,7.452-22.472,17.566-25.475v-61.415c0-14.023-11.368-25.391-25.391-25.391H115.577c-14.023,0-25.391,11.368-25.391,25.391v61.349c10.319,2.934,17.949,13.352,17.949,25.755s-7.63,22.821-17.949,25.755v61.321c0,14.023,11.368,25.391,25.391,25.391h268.846c14.023,0,25.391-11.368,25.391-25.391v-61.814c-10.114-3.003-17.566-13.268-17.566-25.475ZM364.642,315.823h-200.038l-29.245,13.893v-148.582h229.283v134.689Z"/><rect x="197.379" y="224.626" width="26.624" height="47.392" rx="12.207" ry="12.207" transform="translate(421.381 496.644) rotate(-180)"/><rect x="276.38" y="224.626" width="26.624" height="47.392" rx="12.207" ry="12.207" transform="translate(579.384 496.644) rotate(-180)"/></svg>
           </div>
           <div class="msg-content">
             <div class="msg-bubble">
-              <strong>Your VPN issue is being worked on.</strong> Ben Torres from IT has pushed the GlobalProtect update to your device remotely. The update is installing now — you should be able to connect to VPN in a few minutes. I'll let you know once it's confirmed.
+              The update is being installed now. I'll confirm once VPN connectivity is restored.
             </div>
             <div class="msg-time">10:26 AM</div>
           </div>
@@ -588,21 +630,35 @@
         <div class="tp-ticket-title">VPN Connection Failure — Pending GlobalProtect Update</div>
         <div class="tp-ticket-desc">"I can't connect to VPN. Updated macOS last night and now GlobalProtect just spins. I have a critical data pipeline deploy at 11 AM."</div>
 
-        <div class="tp-detail-row">
-          <span class="tp-detail-label">Owner</span>
-          <span class="tp-detail-value">Ben Torres (L2)</span>
-        </div>
-        <div class="tp-detail-row">
-          <span class="tp-detail-label">Category</span>
-          <span class="tp-detail-value">VPN / Network Access</span>
-        </div>
-        <div class="tp-detail-row">
-          <span class="tp-detail-label">Queue</span>
-          <span class="tp-detail-value">Engineering</span>
-        </div>
-        <div class="tp-detail-row">
-          <span class="tp-detail-label">Created</span>
-          <span class="tp-detail-value" style="font-family:'IBM Plex Mono',monospace;font-size:12px;">Apr 1, 9:47 AM</span>
+        <div class="tp-fields-grid">
+          <div class="tp-field">
+            <div class="tp-field-label">Owner</div>
+            <div class="tp-field-value">
+              <div class="tp-field-avatar" style="background:var(--accent);">BT</div>
+              Ben Torres
+            </div>
+          </div>
+          <div class="tp-field">
+            <div class="tp-field-label">Category</div>
+            <div class="tp-field-value">
+              <svg class="tp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Network Access
+            </div>
+          </div>
+          <div class="tp-field">
+            <div class="tp-field-label">Queue</div>
+            <div class="tp-field-value">
+              <svg class="tp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Engineering
+            </div>
+          </div>
+          <div class="tp-field">
+            <div class="tp-field-label">Created</div>
+            <div class="tp-field-value">
+              <svg class="tp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Apr 1, 9:47 AM
+            </div>
+          </div>
         </div>
 
         <div class="tp-divider"></div>
