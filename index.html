@@ -1553,12 +1553,13 @@
         composer.classList.remove('open');
       }
     }
-    // Close ask overlay if clicked outside
+  });
+
+  // Close ask overlay if clicked outside (separate listener)
+  document.addEventListener('mousedown', (e) => {
     const overlay = document.getElementById('askOverlay');
-    if (overlay.classList.contains('open')) {
-      if (!e.target.closest('#askOverlay') && !e.target.closest('.catchup-prompt')) {
-        overlay.classList.remove('open');
-      }
+    if (overlay.classList.contains('open') && !e.target.closest('#askOverlay') && !e.target.closest('.catchup-prompt')) {
+      overlay.classList.remove('open');
     }
   });
 </script>
