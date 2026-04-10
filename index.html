@@ -578,7 +578,7 @@
       display: flex; align-items: center; gap: 8px;
       font-size: 14px; color: var(--text-muted);
       cursor: pointer; transition: color 0.12s;
-      margin: 0 -8px; padding-right: 8px; padding-left: 52px;
+      margin: 0 -8px; padding-right: 8px; padding-left: 8px;
     }
     .tl-item:hover { background: var(--bg-glass); }
     .tl-item:hover .tl-actor,
@@ -587,7 +587,7 @@
     .tl-item.selected .tl-actor,
     .tl-item.selected .tl-detail { color: var(--accent); }
     .tl-item .tl-dot {
-      position: absolute; left: 13px; top: 8px;
+      position: static; flex-shrink: 0;
       width: 22px; height: 22px; border-radius: 50%;
       background: var(--bg); border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
