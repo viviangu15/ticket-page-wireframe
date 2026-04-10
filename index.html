@@ -1519,7 +1519,6 @@
     askOverlay.classList.add('open');
     document.getElementById('askBackdrop').style.display = 'block';
     document.getElementById('askSuggestions').style.display = 'flex';
-    askMessages.innerHTML = '';
     askMessages.appendChild(makeMsg('user', question));
     const typing = document.createElement('div');
     typing.className = 'ask-typing';
