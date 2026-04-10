@@ -382,6 +382,18 @@
     .catchup-action-divider {
       height: 1px; background: var(--border); margin: 0;
     }
+    .catchup-action-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--bg-glass); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .catchup-action-icon svg {
+      width: 14px; height: 14px; color: var(--text-muted);
+      stroke: currentColor; fill: none; stroke-width: 1.5;
+    }
+    .catchup-action:hover .catchup-action-icon { border-color: var(--accent); }
+    .catchup-action:hover .catchup-action-icon svg { color: var(--accent); }
     .catchup-action-content { flex: 1; }
     .catchup-action-title {
       font-size: 14px; font-weight: 500; color: var(--text-primary);
@@ -965,6 +977,7 @@
           </div>
           <div class="catchup-actions">
             <div class="catchup-action">
+              <div class="catchup-action-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               <div class="catchup-action-content">
                 <div class="catchup-action-title">Check workflow status</div>
                 <div class="catchup-action-reason">Jamf push was sent 1 min ago — polling for device check-in</div>
@@ -973,6 +986,7 @@
             </div>
             <div class="catchup-action-divider"></div>
             <div class="catchup-action">
+              <div class="catchup-action-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               <div class="catchup-action-content">
                 <div class="catchup-action-title">Message Sarah</div>
                 <div class="catchup-action-reason">Her deploy deadline is 11:00 AM — she may need a workaround if the push takes longer</div>
@@ -981,6 +995,7 @@
             </div>
             <div class="catchup-action-divider"></div>
             <div class="catchup-action">
+              <div class="catchup-action-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke-linecap="round"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke-linecap="round"/></svg></div>
               <div class="catchup-action-content">
                 <div class="catchup-action-title">View device in Axiom</div>
                 <div class="catchup-action-reason">MDM last check-in was 18 hours ago — may indicate a stale connection</div>
@@ -989,6 +1004,7 @@
             </div>
             <div class="catchup-action-divider"></div>
             <div class="catchup-action">
+              <div class="catchup-action-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               <div class="catchup-action-content">
                 <div class="catchup-action-title">Are there other users with similar issues?</div>
                 <div class="catchup-action-reason">14 other devices in the same state — may need bulk remediation</div>
@@ -997,6 +1013,7 @@
             </div>
             <div class="catchup-action-divider"></div>
             <div class="catchup-action">
+              <div class="catchup-action-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               <div class="catchup-action-content">
                 <div class="catchup-action-title">What changed recently on this device?</div>
                 <div class="catchup-action-reason">Two changes detected — macOS update and pending GP rollout</div>
