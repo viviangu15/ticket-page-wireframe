@@ -1369,6 +1369,11 @@
   </div>
   <div class="ask-overlay-messages" id="askMessages">
   </div>
+  <div class="ask-overlay-suggestions" id="askSuggestions" style="display:flex;gap:6px;padding:6px 16px;border-top:1px solid var(--border);flex-wrap:wrap;overflow-x:auto;">
+    <div class="ask-suggestion" onclick="sendSuggestion(this)" style="padding:4px 12px;border-radius:999px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border-strong);background:var(--bg-glass);color:var(--text-secondary);white-space:nowrap;transition:all 0.15s;">What was tried so far?</div>
+    <div class="ask-suggestion" onclick="sendSuggestion(this)" style="padding:4px 12px;border-radius:999px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border-strong);background:var(--bg-glass);color:var(--text-secondary);white-space:nowrap;transition:all 0.15s;">Show me the device history</div>
+    <div class="ask-suggestion" onclick="sendSuggestion(this)" style="padding:4px 12px;border-radius:999px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border-strong);background:var(--bg-glass);color:var(--text-secondary);white-space:nowrap;transition:all 0.15s;">Draft a message to Sarah</div>
+  </div>
   <div class="ask-overlay-input">
     <input type="text" id="askOverlayInput" placeholder="Ask a follow-up..." onkeydown="if(event.key==='Enter')sendAskMessage()">
     <button class="ask-overlay-send" onclick="sendAskMessage()">
@@ -1513,6 +1518,7 @@
   function openAskOverlay(question) {
     askOverlay.classList.add('open');
     document.getElementById('askBackdrop').style.display = 'block';
+    document.getElementById('askSuggestions').style.display = 'flex';
     askMessages.innerHTML = '';
     askMessages.appendChild(makeMsg('user', question));
     const typing = document.createElement('div');
@@ -1563,6 +1569,13 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeAskOverlay();
   });
+
+  // Suggestion chips in ask panel
+  function sendSuggestion(el) {
+    const text = el.textContent;
+    document.getElementById('askSuggestions').style.display = 'none';
+    openAskOverlay(text);
+  }
 
   // Investigation actions (questions) open the ask overlay
   document.querySelectorAll('.catchup-action').forEach(action => {
